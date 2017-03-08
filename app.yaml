@@ -9,3 +9,5 @@ handlers:
   script: main.app
 - url: /other
   script: other.app
+- url: /bootstrap
+  static_dir: bootstrap

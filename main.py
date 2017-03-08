@@ -11,6 +11,7 @@ class MainPage(webapp2.RequestHandler):
 	def get(self):
 		self.response.headers['Content-Type'] = 'text/html'
 
+		#TODO: memcache the different files here
 		config = {}
 		with open('config.json', 'r') as config_file:
 			config = json.load(config_file)
