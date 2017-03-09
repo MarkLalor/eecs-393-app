@@ -6,7 +6,8 @@ class Course(db.Model):
     name = db.StringProperty() #Human-readable course name.
 
     department = db.StringProperty()   # e.g. EECS
-    courseNumber = db.StringProperty() # e.g. 393
+    number = db.IntegerProperty() # e.g. 393
+    section = db.IntegerProperty() # e.g. 393
 
     year = db.IntegerProperty() # e.g. 2017
     term = db.IntegerProperty() # 0, 1, 2 for fall, spring, summer. Some sort of enumeration solution would be more ideal.

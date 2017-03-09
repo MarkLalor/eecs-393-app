@@ -9,6 +9,8 @@ handlers:
   script: main.app
 - url: /other
   script: other.app
+- url: /debug
+  script: debug.app
 - url: /bootstrap
   static_dir: bootstrap
 - url: /script
