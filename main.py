@@ -1,5 +1,6 @@
 import webapp2
 import json
+from google.appengine.api import users
 
 class MainPage(webapp2.RequestHandler):
 	@staticmethod
@@ -9,6 +10,13 @@ class MainPage(webapp2.RequestHandler):
 			request.response.out.write("\n")
 
 	def get(self):
+		user = users.get_current_user()
+
+		#log in requirement as a handler in the yaml file
+		#TODO make a nicer logout button
+		nickname = user.nickname()
+		logout_url = users.create_logout_url('/');
+		self.response.write('<html><head><a href="{}">Sign Out!</a></head></html>'.format(logout_url))
 		self.response.headers['Content-Type'] = 'text/html'
 
 		#TODO: memcache the different files here
