@@ -11,3 +11,7 @@ handlers:
   script: other.app
 - url: /bootstrap
   static_dir: bootstrap
+- url: /script
+  static_dir: web/JS
+- url: /stylesheet
+  static_dir: web/CSS
