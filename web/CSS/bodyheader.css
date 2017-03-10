@@ -1,3 +1,7 @@
+h1{
+	font-family: 'Antic Slab', serif;
+	font-size:500%;
+}
 #WelcomeMessage{
    position:fixed;
    right:10px;
