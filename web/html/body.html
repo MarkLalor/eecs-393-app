@@ -1,9 +1,72 @@
+<script>
+var HttpClient = function() {
+    this.get = function(aUrl, aCallback) {
+        var anHttpRequest = new XMLHttpRequest();
+        anHttpRequest.onreadystatechange = function() { 
+            if (anHttpRequest.readyState == 4 && anHttpRequest.status == 200)
+                aCallback(anHttpRequest.responseText);
+        }
+
+        anHttpRequest.open( "GET", aUrl, true );            
+        anHttpRequest.send( null );
+    }
+}
+</script>
 <div class="container-fluid" style = "border-top: 5px solid #DDD;">
   <div class="row">
     <div class="col-sm-3 col-lg-2">
       <nav class="navbar navbar-default navbar-fixed-side">
         <h2>Courses</h2>
         <div id="courses">
+            <script>
+                        var client = new HttpClient();
+  client.get('http://localhost:8080/request?data=student', function(response) {
+
+    /*  var courseJSON = {  
+    0: [ {course: "Operating System", department: "EECS", courseNumber: "280", year: 2017, term: 0} ],
+    1: [ {course: "Intro To Java", department: "EECS", courseNumber: "132", year: 2017, term: 0} ],
+    2: [ {course: "Diffy Q", department: "Math", courseNumber: "224", year: 2017, term: 0} ],
+    3: [ {course: "Piano", department: "Music", courseNumber: "102", year: 2017, term: 0} ]
+  }
+*/
+
+            jsonInput = JSON.parse(response)
+            courses = jsonInput.courses;
+            var courseJSON = {};
+            console.log(courses)
+            for (var course in courses){
+              course = courses[course]
+              console.log(course)
+              courseJSON[course.id] = 
+                [{course: course.name,
+                 department: course.department,
+                 courseNumber: course.number.toString(),
+                 year: course.year,
+                 term: (course.term - 1)
+                }]
+                
+            }
+            populateCourses(courseJSON)
+          /*  for (count = 0; count < courses.length; count++){
+              var para = document.createElement("p");
+              var node = document.createTextNode(courses[0]['name']);
+              para.appendChild(node);
+
+              var element = document.getElementById("courses");
+              element.appendChild(para);
+            }*/
+            /*     var tableDiv = document.getElementById("courses");
+              var table = document.createElement('TABLE')
+              var tableBody = document.createElement('TBODY')
+
+              table.border = '1'
+              table.appendChild(tableBody); 
+
+              */            
+  });
+
+
+            </script>
         </div>
       </nav>
     </div>
