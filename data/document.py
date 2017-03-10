@@ -16,7 +16,6 @@ class Document(db.Model):
 
 class UserDocument(ndb.Model):
 	user = ndb.StringProperty()
-	print user
 	blob_key = ndb.BlobKeyProperty()
 
 class DocumentUploadFormHandler(webapp2.RequestHandler):
@@ -36,13 +35,14 @@ class DocumentUploadHandler(blobstore_handlers.BlobstoreUploadHandler):
 		try:
 			upload = self.get_uploads()[0]
 			print "printing out user info"
-			print user.get_current_user().user_id()
+			#print user.get_current_user().user_id()
 			user_document = UserDocument(
-				user=user.get_current_user().user_id(),
+				user="ABC",
 				blob_key=upload.key())
+			print "done adding to model"
 			user_document.put()
 
-			self.redirect('/view_document/%s' % upload.key())
+			self.redirect('/upload_view_document/%s' % upload.key())
 
 		except:
 			self.error(500)
@@ -57,5 +57,5 @@ class ViewDocumentHandler(blobstore_handlers.BlobstoreDownloadHandler):
 app = webapp2.WSGIApplication([
     ('/upload', DocumentUploadFormHandler),
     ('/upload_document', DocumentUploadHandler),
-    ('/view_document/([^/]+)?', ViewDocumentHandler)
+    ('/upload_view_document/([^/]+)?', ViewDocumentHandler)
 ], debug=True)
