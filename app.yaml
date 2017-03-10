@@ -10,6 +10,12 @@ handlers:
   login: required
 - url: /request
   script: request.app
+- url: /upload.*
+  script: document.app
+  login: required
+- url: /other
+  script: other.app
+>>>>>>> Stashed changes
 - url: /debug
   script: debug.app
 - url: /bootstrap
