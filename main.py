@@ -20,7 +20,7 @@ class MainPage(webapp2.RequestHandler):
 
 		nickname = user.nickname() #for debugging
 		logout_url = users.create_logout_url('/');
-		
+
 		self.response.headers['Content-Type'] = 'text/html'
 
 		#TODO: memcache the different files here
@@ -29,7 +29,7 @@ class MainPage(webapp2.RequestHandler):
 			config = json.load(config_file)
 
 		MainPage.html_print(self, 'page_header')
-		MainPage.html_print(self, 'body_header', config['header'],logout_url)
+		MainPage.html_print(self, 'body_header', config['header'],nickname,logout_url)
 		MainPage.html_print(self, 'body')
 		MainPage.html_print(self, 'body_footer')
 		MainPage.html_print(self, 'page_footer')
