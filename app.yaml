@@ -8,8 +8,6 @@ handlers:
 - url: /
   script: main.app
   login: required
-- url: /other
-  script: other.app
 - url: /debug
   script: debug.app
 - url: /bootstrap
