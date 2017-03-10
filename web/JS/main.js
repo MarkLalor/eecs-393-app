@@ -10,6 +10,7 @@
 }
 **/
 function populateCourses(courseJSON) {
+	console.log(courseJSON)
 	for (var i in courseJSON) {
 
 		// Create tag
@@ -124,8 +125,7 @@ function createCoursesString(courseJSON, i) {
 			term = "Summer"
 			break;
 		default:
-			console.log("invalid term number: " + termNumber);
-			term = termNumber;
+			console.log("invalid term number: " + term);
 	}
 
 	return courseJSON[i][0].department + " " + courseJSON[i][0].courseNumber + " " + courseJSON[i][0].course + " (" + courseJSON[i][0].year + " " + term + ")";
@@ -141,14 +141,14 @@ function createCourseItemString(courseItem, i) {
 
 // Random testing
 function main() {
-	var courseJSON = {	
+/*	var courseJSON = {	
 		0: [ {course: "Operating System", department: "EECS", courseNumber: "280", year: 2017, term: 0} ],
 		1: [ {course: "Intro To Java", department: "EECS", courseNumber: "132", year: 2017, term: 0} ],
 		2: [ {course: "Diffy Q", department: "Math", courseNumber: "224", year: 2017, term: 0} ],
 		3: [ {course: "Piano", department: "Music", courseNumber: "102", year: 2017, term: 0} ]
 	}
-
-	populateCourses(courseJSON);
+*/
+//	populateCourses(courseJSON);
 }
 
 main()
