@@ -11,7 +11,7 @@ handlers:
 - url: /request
   script: request.app
 - url: /upload.*
-  script: document.app
+  script: data.document.app
   login: required
 - url: /other
   script: other.app
