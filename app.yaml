@@ -15,7 +15,6 @@ handlers:
   login: required
 - url: /other
   script: other.app
->>>>>>> Stashed changes
 - url: /debug
   script: debug.app
 - url: /bootstrap
