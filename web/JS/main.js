@@ -29,10 +29,10 @@ DUMMY DATA
 **/
 var courseItemJSON= {
 	0: [{ courseItemId: 0, creator: "BOB", creationTime: "10/0/2017", name: "Assignment", body: "shared memory assignment", assigned_date: "10/2/2017", due_date: "10/25/2017"},
-		{ courseItemId: 01, creator: "BOB0", creationTime: "10/0/2017", name: "Assignment0", body: "shared memory assignment", assigned_date: "10/2/2017", due_date: "10/25/2017"},
-		{ courseItemId: 02, creator: "BOB00", creationTime: "10/0/2017", name: "Assignment00", body: "shared memory assignment", assigned_date: "10/2/2017", due_date: "10/25/2017"},
-		{ courseItemId: 03, creator: "BOB000", creationTime: "10/0/2017", name: "Assignment000", body: "shared memory assignment", assigned_date: "10/2/2017", due_date: "10/25/2017"},
-		{ courseItemId: 04, creator: "BOB0000", creationTime: "10/0/2017", name: "Assignment0000", body: "shared memory assignment", assigned_date: "10/2/2017", due_date: "10/25/2017"}
+		{ courseItemId: 1, creator: "BOB0", creationTime: "10/0/2017", name: "Assignment0", body: "shared memory assignment", assigned_date: "10/2/2017", due_date: "10/25/2017"},
+		{ courseItemId: 2, creator: "BOB00", creationTime: "10/0/2017", name: "Assignment00", body: "shared memory assignment", assigned_date: "10/2/2017", due_date: "10/25/2017"},
+		{ courseItemId: 3, creator: "BOB000", creationTime: "10/0/2017", name: "Assignment000", body: "shared memory assignment", assigned_date: "10/2/2017", due_date: "10/25/2017"},
+		{ courseItemId: 4, creator: "BOB0000", creationTime: "10/0/2017", name: "Assignment0000", body: "shared memory assignment", assigned_date: "10/2/2017", due_date: "10/25/2017"}
 		],
 	1: [{ courseItemId: 1, creator: "BOB1", creationTime: "10/1/2017", name: "Assignment1", body: "Linked Lists", assigned_date: "10/2/2017", due_date: "10/25/2017"}],
 	2: [{ courseItemId: 2, creator: "BOB2", creationTime: "10/2/2017", name: "Assignment2", body: "eigen values", assigned_date: "10/2/2017", due_date: "10/25/2017"}],
@@ -62,11 +62,11 @@ function populateCourseItems(tar) {
 	}
 
 	for (var i in courseItems) {
-		console.log(courseItems[i]);
 		// Create tag
 		var courseItemTag = document.createElement('p');
 		courseItemTag.innerHTML = createCourseItemString(courseItems, i);
 		courseItemTag.id = courseID; // id is the courseID
+		courseItemTag.class = courseItems[i].courseItemId;
 		courseItemTag.addEventListener("click", populateCourseItemDescription);
 
 		// Append to div
@@ -74,16 +74,20 @@ function populateCourseItems(tar) {
 	}
 }
 
+// Mostly just copy and pasted, logic should be relooked at
 function populateCourseItemDescription(tar) {
 	var courseID = tar.target.id;
+	var courseItemID = tar.target.class;
 	var courseItems;
 	var courseItemDes = document.getElementById("courseItemDescriptions");
 
-	// basically the table look up: courseItems = getTable(courseID)
 	for (var i in courseItemJSON) {
 		if (i == courseID) {
-			courseItems = courseItemJSON[i];
-			break;
+			for (var j in courseItemJSON[i]) {
+				if (courseItemJSON[i][j].courseItemId == courseItemID){
+					courseItems = courseItemJSON[i][j];
+				}
+			}
 		}
 	}
 	
@@ -93,20 +97,16 @@ function populateCourseItemDescription(tar) {
 	}
 
 	for (var i in courseItems) {
-		for (var j in courseItems[i]) {
-			console.log(courseItems[i][j]);
-			// Create tag
-			var courseItemTag = document.createElement('p');
-			courseItemTag.innerHTML = j + ": " + courseItems[i][j];
-			courseItemTag.id = courseID; // id is the courseID
-			courseItemTag.addEventListener("click", populateCourseItemDescription);
-
-			// Append to div
-			courseItemDes.appendChild(courseItemTag);
+		if(i == "courseItemId") {
+			continue;
 		}
-			
-	}
+		// Create tag
+		var courseItemTag = document.createElement('p');
+		courseItemTag.innerHTML = i + ": " + courseItems[i];
 
+		// Append to div
+		courseItemDes.appendChild(courseItemTag);
+		}
 
 }
 
