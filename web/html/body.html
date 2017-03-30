@@ -1,3 +1,6 @@
+{% extends "web/html/base.html" %}
+
+{% block body %}
 <script>
 var HttpClient = function() {
     this.get = function(aUrl, aCallback) {
@@ -19,7 +22,8 @@ var HttpClient = function() {
         <h2>Courses</h2>
         <div id="courses">
             <script>
-                        var client = new HttpClient();
+  
+  var client = new HttpClient();
   client.get('http://localhost:8080/request?data=student', function(response) {
 
     /*  var courseJSON = {  
@@ -86,3 +90,4 @@ var HttpClient = function() {
     </div>
   </div>
 </div>
+{% endblock %}
