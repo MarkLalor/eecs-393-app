@@ -1,5 +1,6 @@
 import webapp2
 import json
+from google.appengine.ext import blobstore
 import os
 
 from google.appengine.api import users
@@ -29,6 +30,7 @@ class MainPage(webapp2.RequestHandler):
 		user = users.get_current_user()
 		#log in requirement as a handler in the yaml file
 		#additional failsafe here, can be removed
+		upload_url = blobstore.create_upload_url('/upload_document')
 		if not user:
 			login_url = users.create_login_url('/')
 			self.redirect(login_url)
@@ -55,6 +57,7 @@ class MainPage(webapp2.RequestHandler):
 			'config_header': config['header'],
 			'nickname': nickname,
 			'logout_url': logout_url,
+			'upload_url': upload_url,
 		}
 
 		template = JINJA_ENVIRONMENT.get_template('web/html/body.html')

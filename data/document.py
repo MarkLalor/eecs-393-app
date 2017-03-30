@@ -4,6 +4,8 @@ from google.appengine.ext import blobstore
 from google.appengine.ext import ndb
 from google.appengine.ext.webapp import blobstore_handlers
 import webapp2
+import courseitem as ci
+import uuid
 
 class Document(db.Model):
     documentID = db.IntegerProperty()
@@ -18,30 +20,22 @@ class UserDocument(ndb.Model):
 	user = ndb.StringProperty()
 	blob_key = ndb.BlobKeyProperty()
 
-class DocumentUploadFormHandler(webapp2.RequestHandler):
-	def get(self):
-		upload_url = blobstore.create_upload_url('/upload_document')
-		self.response.out.write("""
-			<html><body>
-<form action="{0}" method="POST" enctype="multipart/form-data">
-  Upload File: <input type="file" name="file"><br>
-  <input type="submit" name="submit" value="Submit">
-</form>
-</body></html>""".format(upload_url))
-
-
 class DocumentUploadHandler(blobstore_handlers.BlobstoreUploadHandler):
 	def post(self):
 		try:
 			upload = self.get_uploads()[0]
 			print "printing out user info"
-			#print user.get_current_user().user_id()
+			username = users.get_current_user().nickname().split("@")[0]
 			user_document = UserDocument(
-				user="ABC",
+				user=username,
 				blob_key=upload.key())
 			print "done adding to model"
 			user_document.put()
 
+			
+			my_query = blobstore.BlobInfo.all()
+			for blob_info in my_query:
+				print str(blob_info.key())
 			self.redirect('/upload_view_document/%s' % upload.key())
 
 		except:
@@ -55,7 +49,6 @@ class ViewDocumentHandler(blobstore_handlers.BlobstoreDownloadHandler):
 			self.send_blob(document_key)
 
 app = webapp2.WSGIApplication([
-    ('/upload', DocumentUploadFormHandler),
     ('/upload_document', DocumentUploadHandler),
     ('/upload_view_document/([^/]+)?', ViewDocumentHandler)
 ], debug=True)
