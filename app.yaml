@@ -17,7 +17,7 @@ handlers:
   script: other.app
 - url: /debug
   script: debug.app
-- url: /add_assignment
+- url: /add_assignment*
   script: data.courseitem.app 
 - url: /bootstrap
   static_dir: bootstrap

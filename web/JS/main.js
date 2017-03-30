@@ -17,6 +17,7 @@ function populateCourses(courseJSON) {
 		var course = document.createElement('p');
 		course.innerHTML = createCoursesString(courseJSON, i);
 		course.id = i; // id is the courseID
+		console.log('adding a listener')
 		course.addEventListener("click", populateCourseItems);
 
 		// Append to div
@@ -48,7 +49,9 @@ DUMMY DATA
 
 function populateCourseItems(tar) {
 	var courseID = tar.target.id;
+	console.log('Clicked on a course');
 	document.getElementById('courseid').value = courseID;
+	console.log(document.getElementById('courseid').value)
 	var courseItems;
 	var courseItemDiv = document.getElementById("courseItems");
 

@@ -32,6 +32,7 @@ class DocumentUploadHandler(blobstore_handlers.BlobstoreUploadHandler):
 			print "done adding to model"
 			user_document.put()
 
+			
 			my_query = blobstore.BlobInfo.all()
 			for blob_info in my_query:
 				print str(blob_info.key())
