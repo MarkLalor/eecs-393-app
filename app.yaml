@@ -5,7 +5,7 @@ api_version: 1
 threadsafe: true
 
 handlers:
-- url: /
+- url: /index\.html
   script: main.app
   login: required
 - url: /request
@@ -23,6 +23,9 @@ handlers:
   static_dir: web/JS
 - url: /stylesheet
   static_dir: web/CSS
+- url: /.*
+  script: main.app
+  login: required
 
 libraries:
 - name: ssl

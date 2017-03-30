@@ -10,4 +10,4 @@ class Course(db.Model):
     section = db.IntegerProperty() # e.g. 100
 
     year = db.IntegerProperty() # e.g. 2017
-    term = db.IntegerProperty() # 0, 1, 2 for fall, spring, summer. Some sort of enumeration solution would be more ideal.
+    term = db.StringProperty() # Spring, Summer, Fall, etc.
