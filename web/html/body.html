@@ -73,6 +73,12 @@ var HttpClient = function() {
     <div class="col-sm-3 col-lg-2">
       <nav class="navbar navbar-default navbar-fixed-side">
         <h2>Course Items</h2>
+         <div>
+          <form action="'%s'" method="POST" enctype="multipart/form-data">
+  Upload File: <input type="file" name="file"><br>
+  <input type="submit" name="submit" value="Submit">
+</form>
+</div>
         <div id="courseItems">
         </div>
       </nav>

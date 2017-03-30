@@ -1,5 +1,6 @@
 import webapp2
 import json
+from google.appengine.ext import blobstore
 from google.appengine.api import users
 
 class MainPage(webapp2.RequestHandler):
@@ -14,6 +15,7 @@ class MainPage(webapp2.RequestHandler):
 		user = users.get_current_user()
 		#log in requirement as a handler in the yaml file
 		#additional failsafe here, can be removed
+		upload_url = blobstore.create_upload_url('/upload_document')
 		if not user:
 			login_url = users.create_login_url('/')
 			self.redirect(login_url)
@@ -30,7 +32,7 @@ class MainPage(webapp2.RequestHandler):
 
 		MainPage.html_print(self, 'page_header')
 		MainPage.html_print(self, 'body_header', config['header'],nickname,logout_url)
-		MainPage.html_print(self, 'body')
+		MainPage.html_print(self, 'body', upload_url)
 		MainPage.html_print(self, 'body_footer')
 		MainPage.html_print(self, 'page_footer')
 
