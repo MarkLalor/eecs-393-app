@@ -637,6 +637,28 @@ def get_user_profile(request_ctx, user_id, **request_kwargs):
 
     return response
 
+#defined by Vimig
+def get_my_user_profile(request_ctx, **request_kwargs):
+    """
+    Returns user profile data, including user id, name, and profile pic.
+    
+    When requesting the profile for the user accessing the API, the user's
+    calendar feed URL will be returned as well.
+
+        :param request_ctx: The request context
+        :type request_ctx: :class:RequestContext
+        :param user_id: (required) ID
+        :type user_id: string
+        :return: Get user profile
+        :rtype: requests.Response (with Profile data)
+
+    """
+
+    path = '/v1/users/self/profile'
+    url = request_ctx.base_api_url + path
+    response = client.get(request_ctx, url, **request_kwargs)
+
+    return response
 
 def list_avatar_options(request_ctx, user_id, per_page=None, **request_kwargs):
     """

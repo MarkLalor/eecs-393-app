@@ -9,6 +9,13 @@
 	],
 }
 **/
+
+function openCourseItems(courseID, course_item_list){
+	console.log(courseID)
+
+	course_items = course_item_list[courseID]
+	console.log(course_items)
+}
 function populateCourses(courseJSON) {
 	console.log(courseJSON)
 	for (var i in courseJSON) {
@@ -144,17 +151,3 @@ function createCourseItemString(courseItem, i) {
 // function teCourseItemDescriptionString(courseItems, i) {
 // 	return courseItem[i].name;
 // }
-
-// Random testing
-function main() {
-/*	var courseJSON = {	
-		0: [ {course: "Operating System", department: "EECS", courseNumber: "280", year: 2017, term: 0} ],
-		1: [ {course: "Intro To Java", department: "EECS", courseNumber: "132", year: 2017, term: 0} ],
-		2: [ {course: "Diffy Q", department: "Math", courseNumber: "224", year: 2017, term: 0} ],
-		3: [ {course: "Piano", department: "Music", courseNumber: "102", year: 2017, term: 0} ]
-	}
-*/
-//	populateCourses(courseJSON);
-}
-
-main()
