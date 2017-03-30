@@ -73,11 +73,24 @@ var HttpClient = function() {
     <div class="col-sm-3 col-lg-2">
       <nav class="navbar navbar-default navbar-fixed-side">
         <h2>Course Items</h2>
-         <div>
-          <form action="'%s'" method="POST" enctype="multipart/form-data">
-  Upload File: <input type="file" name="file"><br>
-  <input type="submit" name="submit" value="Submit">
-</form>
+        <div>
+          <form action="/add_assignment">
+  Assignment Name:<br>
+  <input type="text" name="assignmentname">
+  <br>
+  Description:<br>
+  <input type="text" name="description" >
+  <br>
+  Assigned Date:<br>
+  <input type="text" name="assigneddate" >
+  <br>
+  Due Date:<br>
+  <input type="text" name="duedate" >
+  <br>
+  <br>
+  <input type="hidden" name="courseid" id="courseid" />
+  <input type="submit" value="Submit">
+</form> 
 </div>
         <div id="courseItems">
         </div>
@@ -86,8 +99,15 @@ var HttpClient = function() {
     <div class="col-sm-3 col-lg-3">
       <nav class="navbar navbar-default navbar-fixed-side">
         <h2>Items Description</h2>
+
         <div id="courseItemDescriptions">
         </div>
+        <div>
+          <form action="'%s'" method="POST" enctype="multipart/form-data">
+  Upload File: <input type="file" name="file"><br>
+  <input type="submit" name="submit" value="Submit">
+</form>
+</div>
       </nav>
     </div>
   </div>

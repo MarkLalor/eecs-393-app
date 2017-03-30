@@ -44,8 +44,11 @@ var courseItemJSON= {
 DUMMY DATA
 **/
 
+
+
 function populateCourseItems(tar) {
 	var courseID = tar.target.id;
+	document.getElementById('courseid').value = courseID;
 	var courseItems;
 	var courseItemDiv = document.getElementById("courseItems");
 
