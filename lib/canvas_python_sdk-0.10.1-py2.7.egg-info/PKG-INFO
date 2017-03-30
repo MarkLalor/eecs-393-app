@@ -1,0 +1,30 @@
+Metadata-Version: 1.1
+Name: canvas-python-sdk
+Version: 0.10.1
+Summary: A python SDK for Instructure's Canvas LMS API
+Home-page: https://github.com/penzance/canvas_python_sdk
+Author: Harvard University
+Author-email: tlt-opensource@g.harvard.edu
+License: MIT
+Description: canvas_python_sdk
+        =================
+        
+        Installation
+        -------------
+        
+        Detailed instructions for installation and configuration of Canvas are provided
+        on our wiki.
+        
+         * [Quick Start](https://github.com/penzance/canvas_python_sdk/wiki)
+         
+        
+Keywords: canvas api sdk LMS
+Platform: UNKNOWN
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.6
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development

@@ -1,0 +1,4 @@
+requests
+
+[docs]
+sphinx>=1.2.0

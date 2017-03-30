@@ -23,3 +23,11 @@ handlers:
   static_dir: web/JS
 - url: /stylesheet
   static_dir: web/CSS
+
+libraries:
+- name: ssl
+  version: latest
+- name: webapp2
+  version: latest
+- name: jinja2
+  version: latest
