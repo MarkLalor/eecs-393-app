@@ -1,3 +1,6 @@
+{% extends "web/html/base.html" %}
+
+{% block body %}
 <script>
 var HttpClient = function() {
     this.get = function(aUrl, aCallback) {
@@ -19,7 +22,8 @@ var HttpClient = function() {
         <h2>Courses</h2>
         <div id="courses">
             <script>
-                        var client = new HttpClient();
+  
+  var client = new HttpClient();
   client.get('http://localhost:8080/request?data=student', function(response) {
 
     /*  var courseJSON = {  
@@ -103,7 +107,7 @@ var HttpClient = function() {
         <div id="courseItemDescriptions">
         </div>
         <div>
-          <form action="'%s'" method="POST" enctype="multipart/form-data">
+          <form action="{{ upload_url }}" method="POST" enctype="multipart/form-data">
   Upload File: <input type="file" name="file"><br>
   <input type="submit" name="submit" value="Submit">
 </form>
@@ -112,3 +116,4 @@ var HttpClient = function() {
     </div>
   </div>
 </div>
+{% endblock %}
