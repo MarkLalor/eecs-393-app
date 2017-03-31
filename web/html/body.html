@@ -1,20 +1,7 @@
 {% extends "web/html/base.html" %}
 
 {% block body %}
-<script>
-/* var HttpClient = function() {
-    this.get = function(aUrl, aCallback) {
-        var anHttpRequest = new XMLHttpRequest();
-        anHttpRequest.onreadystatechange = function() { 
-            if (anHttpRequest.readyState == 4 && anHttpRequest.status == 200)
-                aCallback(anHttpRequest.responseText);
-        }
 
-        anHttpRequest.open( "GET", aUrl, true );            
-        anHttpRequest.send( null );
-    }
-} */
-</script>
 <div class="container-fluid" style = "border-top: 5px solid #DDD;">
   <div class="row">
     <div class="col-sm-3 col-lg-2">
@@ -22,9 +9,9 @@
         <h2>Courses</h2>
         <div id="courses">
         {% if courses and course_items %}
-        {% for course in courses %}
-        <p class="courses" id="{{course.courseID}}" onclick="openCourseItems({{course.courseID}},{{course_items}})">{{course.name}}</p>
-        {% endfor %}
+          {% for course in courses %}
+            <p class="courses" id="{{course.courseID}}" onclick="openCourseItems({{course.courseID}},{{course_items}})">{{course.name}}</p>
+          {% endfor %}
         {% endif %}
         </div>
       </nav>
@@ -33,24 +20,27 @@
       <nav class="navbar navbar-default navbar-fixed-side">
         <h2>Course Items</h2>
         <div>
-          <form action="/add_assignment" method="POST">
-  Assignment Name:<br>
-  <input type="text" name="assignmentname">
-  <br>
-  Description:<br>
-  <input type="text" name="description" >
-  <br>
-  Assigned Date:<br>
-  <input type="text" name="assigneddate" >
-  <br>
-  Due Date:<br>
-  <input type="text" name="duedate" >
-  <br>
-  <br>
-  <input type="hidden" name="courseid" id="courseid" />
-  <input type="submit" value="Submit">
-</form> 
-</div>
+          <form action="/add_assignment" method="POST">Assignment Name:
+            <br>
+            <input type="text" name="assignmentname">
+            <br>
+            Description:
+            <br>
+            <input type="text" name="description" >
+            <br>
+            Assigned Date:
+            <br>
+            <input type="text" name="assigneddate" >
+            <br>
+            Due Date:
+            <br>
+            <input type="text" name="duedate" >
+            <br>
+            <br>
+            <input type="hidden" name="courseid" id="courseid" />
+            <input type="submit" value="Submit">
+          </form> 
+        </div>
         <div id="courseItems">
         </div>
       </nav>
@@ -63,11 +53,21 @@
         </div>
         <div>
           <form action="{{ upload_url }}" method="POST" enctype="multipart/form-data">
-  Upload File: <input type="file" name="file"><br>
-  <input type="submit" name="submit" value="Submit">
-</form>
-</div>
+          Upload File: 
+          <input type="file" name="file"><br>
+          <input type="submit" name="submit" value="Submit">
+          </form>
+        </div>
       </nav>
+    </div>
+    <div class="col-sm-3 col-lg-2">
+      <nav class="navbar navbar-default navbar-fixed-side">
+        <!-- Messages container -->
+        <input id="chattext" type="text" placeholder="Message"><br/>
+        <button id="chatpost">Post</button><br/>
+        <div id="chatresults"></div>
+      </nav>
+      </div>
     </div>
   </div>
 </div>
