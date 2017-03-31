@@ -128,6 +128,7 @@ function populateCourseItemDescription(aCourseID, courseItemJSON, aCourseItemID)
 	var courseItemID = aCourseItemID
 	var courseItems;
 	var courseItemDes = document.getElementById("courseItemDescriptions");
+	document.getElementById("courseitemid").value = courseItemID;
 
 	for (var i in courseItemJSON) {
 		if (i == courseID) {

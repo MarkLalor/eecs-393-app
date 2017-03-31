@@ -4,7 +4,7 @@ from google.appengine.ext import blobstore
 from google.appengine.ext import ndb
 from google.appengine.ext.webapp import blobstore_handlers
 import webapp2
-import courseitem as ci
+from data.courseitem import CourseItem
 import uuid
 
 class Document(db.Model):
@@ -19,20 +19,31 @@ class Document(db.Model):
 class UserDocument(ndb.Model):
 	user = ndb.StringProperty()
 	blob_key = ndb.BlobKeyProperty()
+	courseitemid = ndb.IntegerProperty()
+
+	def getJSONRepresentation(self):
+		json_rep = {"user": self.user, "blob_key": str(self.blob_key), "courseitemid": str(courseitemid)}
 
 class DocumentUploadHandler(blobstore_handlers.BlobstoreUploadHandler):
 	def post(self):
 		try:
 			upload = self.get_uploads()[0]
+			courseitemid = self.request.get("courseitemid")
 			print "printing out user info"
 			username = users.get_current_user().nickname().split("@")[0]
 			user_document = UserDocument(
 				user=username,
-				blob_key=upload.key())
+				blob_key=upload.key(),
+				courseitemid=int(courseitemid))
 			print "done adding to model"
 			user_document.put()
-
-			
+			print courseitemid
+			q = CourseItem.gql("WHERE courseItemID = :1", int(courseitemid))
+			courseitem = q.get()
+			print courseitem
+			courseitem.documents.append(upload.key())
+			courseitem.put()
+			print "done adding to database"
 			my_query = blobstore.BlobInfo.all()
 			for blob_info in my_query:
 				print str(blob_info.key())
