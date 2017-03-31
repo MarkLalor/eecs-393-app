@@ -75,11 +75,11 @@ class DatastoreTestCase(unittest.TestCase):
     # [START datastore_example_filter]
     def testFilterByNumber(self):
         root = TestEntityGroupRoot(id="root")
-        TestModel(parent=root.key).put()
-        TestModel(courseID=17, parent=root.key).put()
-        query = TestModel.query(ancestor=root.key).filter(
-            TestModel.number == 42)
-        results = query.fetch(2)
+        #TestModel(parent=root.key).put()
+        TestModel(courseID=42).put()
+        query = TestModel.query().filter(
+            TestModel.courseID == 42)
+        results = query.fetch(1)
         self.assertEqual(1, len(results))
         self.assertEqual(42, results[0].number)
     # [END datastore_example_filter]
