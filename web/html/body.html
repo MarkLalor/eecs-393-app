@@ -23,7 +23,7 @@
         <div id="courses">
         {% if courses and course_items %}
         {% for course in courses %}
-        <p onclick="openCourseItems({{course.courseID}},{{course_items}})">{{course.name}}</p>
+        <p class="courses" id="{{course.courseID}}" onclick="openCourseItems({{course.courseID}},{{course_items}})">{{course.name}}</p>
         {% endfor %}
         {% endif %}
         </div>

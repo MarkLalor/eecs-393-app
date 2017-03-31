@@ -4,7 +4,7 @@ import webapp2
 import datetime
 from random import randint
 from google.appengine.api import users
-
+import json 
 
 class CourseItem(db.Model):
     courseItemID = db.IntegerProperty()
@@ -23,6 +23,21 @@ class CourseItem(db.Model):
     due_date = db.DateTimeProperty()
 
     documents = db.ListProperty(item_type=int,default=[]) # list of document IDs [see documentID of class Document(db.Model)]
+
+    def getJSONRepresentation(self):
+        #0: [{ courseItemId: 0, creator: "BOB", creationTime: "10/0/2017", name: "Assignment", body: "shared memory assignment", assigned_date: "10/2/2017", due_date: "10/25/2017"},
+        integernum = int(self.courseItemID)
+        print integernum
+        json_rep = {"courseItemId":int(self.courseItemID),
+                #"courseID": int(self.courseID),
+                "creator": str(self.creator),
+                "creationTime": str(self.creationTime.isoformat()),
+                "name":str(self.name),
+                "body":str(self.body),
+                "assigned_date":str(self.assigned_date.isoformat()),
+                "due_date":str(self.due_date.isoformat()),
+                "documents":list(self.documents)}
+        return json_rep
 
 class CourseItemUpload(webapp2.RequestHandler):
     def post(self):

@@ -11,11 +11,34 @@
 **/
 
 function openCourseItems(courseID, course_item_list){
-	console.log(courseID)
 
-	course_items = course_item_list[courseID]
-	console.log(course_items)
+
+	course = document.getElementById(courseID);
+
+	var addClass = "highlight";
+
+	$(".courses").removeClass(addClass);
+	$("#" + courseID).addClass(addClass)
+
+	// var courses = document.getElementsByClassName("courses");
+
+	// for (var x=0; x<courses.length; x++){
+	// 	courses[x].removeClass(addClass)
+		
+	// }
+
+	course_items = course_item_list[courseID];
+	//document.getElementById('courseid').value = courseID;
+	console.log(course_item_list)
+	
+	var correctedJSON;
+
+	populateCourseItems(courseID,course_item_list);
+	
+	//course.addEventListener("click", populateCourseItems);
+
 }
+
 function populateCourses(courseJSON) {
 	console.log(courseJSON)
 	for (var i in courseJSON) {
@@ -36,26 +59,23 @@ function populateCourses(courseJSON) {
 /** 
 DUMMY DATA
 **/
-var courseItemJSON= {
-	0: [{ courseItemId: 0, creator: "BOB", creationTime: "10/0/2017", name: "Assignment", body: "shared memory assignment", assigned_date: "10/2/2017", due_date: "10/25/2017"},
-		{ courseItemId: 1, creator: "BOB0", creationTime: "10/0/2017", name: "Assignment0", body: "shared memory assignment", assigned_date: "10/2/2017", due_date: "10/25/2017"},
-		{ courseItemId: 2, creator: "BOB00", creationTime: "10/0/2017", name: "Assignment00", body: "shared memory assignment", assigned_date: "10/2/2017", due_date: "10/25/2017"},
-		{ courseItemId: 3, creator: "BOB000", creationTime: "10/0/2017", name: "Assignment000", body: "shared memory assignment", assigned_date: "10/2/2017", due_date: "10/25/2017"},
-		{ courseItemId: 4, creator: "BOB0000", creationTime: "10/0/2017", name: "Assignment0000", body: "shared memory assignment", assigned_date: "10/2/2017", due_date: "10/25/2017"}
-		],
-	1: [{ courseItemId: 1, creator: "BOB1", creationTime: "10/1/2017", name: "Assignment1", body: "Linked Lists", assigned_date: "10/2/2017", due_date: "10/25/2017"}],
-	2: [{ courseItemId: 2, creator: "BOB2", creationTime: "10/2/2017", name: "Assignment2", body: "eigen values", assigned_date: "10/2/2017", due_date: "10/25/2017"}],
-	3: [{ courseItemId: 3, creator: "BOB3", creationTime: "10/3/2017", name: "Assignment3", body: "sheet reading", assigned_date: "10/2/2017", due_date: "10/25/2017"}],
-}
+// var courseItemJSON= {
+// 	0: [{ courseItemId: 0, creator: "BOB", creationTime: "10/0/2017", name: "Assignment", body: "shared memory assignment", assigned_date: "10/2/2017", due_date: "10/25/2017"},
+// 		{ courseItemId: 1, creator: "BOB0", creationTime: "10/0/2017", name: "Assignment0", body: "shared memory assignment", assigned_date: "10/2/2017", due_date: "10/25/2017"},
+// 		{ courseItemId: 2, creator: "BOB00", creationTime: "10/0/2017", name: "Assignment00", body: "shared memory assignment", assigned_date: "10/2/2017", due_date: "10/25/2017"},
+// 		{ courseItemId: 3, creator: "BOB000", creationTime: "10/0/2017", name: "Assignment000", body: "shared memory assignment", assigned_date: "10/2/2017", due_date: "10/25/2017"},
+// 		{ courseItemId: 4, creator: "BOB0000", creationTime: "10/0/2017", name: "Assignment0000", body: "shared memory assignment", assigned_date: "10/2/2017", due_date: "10/25/2017"}
+// 		],
+// 	1: [{ courseItemId: 1, creator: "BOB1", creationTime: "10/1/2017", name: "Assignment1", body: "Linked Lists", assigned_date: "10/2/2017", due_date: "10/25/2017"}],
+// 	2: [{ courseItemId: 2, creator: "BOB2", creationTime: "10/2/2017", name: "Assignment2", body: "eigen values", assigned_date: "10/2/2017", due_date: "10/25/2017"}],
+// 	3: [{ courseItemId: 3, creator: "BOB3", creationTime: "10/3/2017", name: "Assignment3", body: "sheet reading", assigned_date: "10/2/2017", due_date: "10/25/2017"}],
+// }
 
 /** 
 DUMMY DATA
 **/
-
-
-
-function populateCourseItems(tar) {
-	var courseID = tar.target.id;
+function populateCourseItems(aCourseID, courseItemJSON) {
+	var courseID = aCourseID
 	console.log('Clicked on a course');
 	document.getElementById('courseid').value = courseID;
 	console.log(document.getElementById('courseid').value)
@@ -81,7 +101,8 @@ function populateCourseItems(tar) {
 		courseItemTag.innerHTML = createCourseItemString(courseItems, i);
 		courseItemTag.id = courseID; // id is the courseID
 		courseItemTag.class = courseItems[i].courseItemId;
-		courseItemTag.addEventListener("click", populateCourseItemDescription);
+		console.log("consolel loasdfad" + courseItemTag.class);
+		courseItemTag.addEventListener("click", populateCourseItemDescription(courseID, courseItemJSON, courseItems[i].courseItemId));
 
 		// Append to div
 		courseItemDiv.appendChild(courseItemTag);
@@ -89,16 +110,19 @@ function populateCourseItems(tar) {
 }
 
 // Mostly just copy and pasted, logic should be relooked at
-function populateCourseItemDescription(tar) {
-	var courseID = tar.target.id;
-	var courseItemID = tar.target.class;
+function populateCourseItemDescription(aCourseID, courseItemJSON, aCourseItemID) {
+	console.log(aCourseID + " " + aCourseItemID)
+	var courseID = aCourseID
+	var courseItemID = aCourseItemID
 	var courseItems;
 	var courseItemDes = document.getElementById("courseItemDescriptions");
 
 	for (var i in courseItemJSON) {
 		if (i == courseID) {
+			console.log("enters courseiD secitons");
 			for (var j in courseItemJSON[i]) {
 				if (courseItemJSON[i][j].courseItemId == courseItemID){
+					console.log("enters the deepest levels");
 					courseItems = courseItemJSON[i][j];
 				}
 			}
@@ -117,7 +141,8 @@ function populateCourseItemDescription(tar) {
 		// Create tag
 		var courseItemTag = document.createElement('p');
 		courseItemTag.innerHTML = i + ": " + courseItems[i];
-
+		courseItemTag.class = "courseItemDescription"
+		//console.log(courseItemTag.innerHTML)
 		// Append to div
 		courseItemDes.appendChild(courseItemTag);
 		}

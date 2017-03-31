@@ -6,7 +6,7 @@ h2{
 	font-family: 'Antic Slab', serif;
 	font-size:250%;
 }
-p:hover {
+.highlight {
 	background-color: yellow;
 	cursor: pointer;
 }

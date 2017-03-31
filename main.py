@@ -5,6 +5,8 @@ import os
 import datetime
 
 from google.appengine.api import users
+from google.appengine.ext import db
+
 import urllib2
 from canvas_sdk import RequestContext
 from canvas_sdk.methods import sections
@@ -21,7 +23,7 @@ class MainPage(webapp2.RequestHandler):
 	def get(self):
 		test = self.request
 		print test
-		self.response.out.write("what the hell")
+		self.response.out.write("what the3 hell")
 		oauth_token = "5590~AiNzEe2sqfpgQuKEn6vCoHUG1x8PTt0VniscrvG8gSp0hke4OW5jciN0maBxm9QQ"
 		base_api_url = 'https://canvas.case.edu/api'
 		rc = RequestContext(oauth_token, base_api_url, timeout=60)
@@ -119,7 +121,7 @@ class MainPage(webapp2.RequestHandler):
 			q2 = CourseItem.gql("WHERE courseID = :1", courseID)
 			course_item_list[int(courseID)] = []
 			for course_item in q2:
-				course_item_list[int(courseID)].append(course_item)
+				course_item_list[int(courseID)].append(course_item.getJSONRepresentation())
 
 		nickname = user.nickname() #for debugging
 		logout_url = users.create_logout_url('/');
@@ -136,7 +138,7 @@ class MainPage(webapp2.RequestHandler):
 			'nickname': nickname,
 			'logout_url': logout_url,
 			'courses': courses_render,
-			'course_items': course_item_list
+			'course_items': course_item_list,
 			'upload_url': upload_url,
 		}
 
