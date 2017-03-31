@@ -11,6 +11,7 @@
 **/
 
 function openCourseItems(courseID, course_item_list){
+	console.log("{{ nickname }}")
 
 
 	course = document.getElementById(courseID);
@@ -128,6 +129,7 @@ function populateCourseItemDescription(aCourseID, courseItemJSON, aCourseItemID)
 	var courseItemID = aCourseItemID
 	var courseItems;
 	var courseItemDes = document.getElementById("courseItemDescriptions");
+	document.getElementById("courseitemid").value = aCourseItemID;
 
 	for (var i in courseItemJSON) {
 		if (i == courseID) {

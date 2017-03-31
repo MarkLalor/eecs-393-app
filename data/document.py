@@ -4,8 +4,8 @@ from google.appengine.ext import blobstore
 from google.appengine.ext import ndb
 from google.appengine.ext.webapp import blobstore_handlers
 import webapp2
-import courseitem as ci
 import uuid
+from data.courseitem import CourseItem
 
 class Document(db.Model):
     documentID = db.IntegerProperty()
@@ -18,24 +18,35 @@ class Document(db.Model):
 
 class UserDocument(ndb.Model):
 	user = ndb.StringProperty()
-	blob_key = ndb.BlobKeyProperty()
+	blob_key = ndb.StringProperty()
+	courseitemid = ndb.IntegerProperty()
+
+	def getJSONRepresentation(self):
+		documentjson = {"user": self.user, "blob_key": str(self.blob_key), "courseitemid": str(self.courseitemid)}
+		return documentjson
 
 class DocumentUploadHandler(blobstore_handlers.BlobstoreUploadHandler):
 	def post(self):
 		try:
 			upload = self.get_uploads()[0]
+			courseitemid = self.request.get("courseitemid")
 			print "printing out user info"
 			username = users.get_current_user().nickname().split("@")[0]
 			user_document = UserDocument(
 				user=username,
-				blob_key=upload.key())
-			print "done adding to model"
+				courseitemid= int(courseitemid),
+				blob_key=str(upload.key()))
+			print "printing the blob key"
+			print str(upload.key())
 			user_document.put()
-
+			q = CourseItem.gql("WHERE courseItemID = :1", int(courseitemid))
+			courseitem = q.get()
+			courseitem.documents.append(upload.key())
+			courseitem.put()
 			
 			my_query = blobstore.BlobInfo.all()
-			for blob_info in my_query:
-				print str(blob_info.key())
+			#for blob_info in my_query:
+			#	print str(blob_info.key())
 			self.redirect('/upload_view_document/%s' % upload.key())
 
 		except:

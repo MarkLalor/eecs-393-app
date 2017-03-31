@@ -14,6 +14,7 @@ from canvas_sdk.methods import courses
 from canvas_sdk.methods import users as canvas_users
 from data.student import Student
 from data.course import Course
+from data.document import UserDocument
 from data.courseitem import CourseItem
 
 import jinja2
@@ -115,12 +116,20 @@ class MainPage(webapp2.RequestHandler):
 				courses_render.append(q1.get())
 		
 		course_item_list = {}
+		document_list = {}
 		#{courseID: [CourseItem1, CourseItem2] }
 		for courseID in curr_user_courseID_list:
 			q2 = CourseItem.gql("WHERE courseID = :1", courseID)
 			course_item_list[int(courseID)] = []
+			print 'q111111'
+			print q2.get()
 			for course_item in q2:
+				print 'course_item', course_item
 				course_item_list[int(courseID)].append(course_item.getJSONRepresentation())
+				q3 = UserDocument.gql("WHERE courseitemid = :1", course_item.courseItemID)
+				document_list[int(course_item.courseItemID)] = []
+				for document in q3:
+					document_list[int(course_item.courseItemID)].append(document.getJSONRepresentation())
 
 		nickname = user.nickname() #for debugging
 		logout_url = users.create_logout_url('/');

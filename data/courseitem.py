@@ -4,6 +4,7 @@ import webapp2
 import datetime
 from random import randint
 from google.appengine.api import users
+from google.appengine.ext import blobstore
 import json 
 
 class CourseItem(db.Model):
@@ -22,12 +23,14 @@ class CourseItem(db.Model):
     assigned_date = db.DateTimeProperty()
     due_date = db.DateTimeProperty()
 
-    documents = db.ListProperty(item_type=int,default=[]) # list of document IDs [see documentID of class Document(db.Model)]
+    documents = db.ListProperty(item_type=str,default=[]) # list of document IDs [see documentID of class Document(db.Model)]
 
     def getJSONRepresentation(self):
         #0: [{ courseItemId: 0, creator: "BOB", creationTime: "10/0/2017", name: "Assignment", body: "shared memory assignment", assigned_date: "10/2/2017", due_date: "10/25/2017"},
         integernum = int(self.courseItemID)
-        print integernum
+        print "printing out all items"
+        print list(self.documents)
+
         json_rep = {"courseItemId":int(self.courseItemID),
                 #"courseID": int(self.courseID),
                 "creator": str(self.creator),
