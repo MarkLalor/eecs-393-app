@@ -23,7 +23,6 @@ class MainPage(webapp2.RequestHandler):
 	def get(self):
 		test = self.request
 		print test
-		self.response.out.write("what the3 hell")
 		oauth_token = "5590~AiNzEe2sqfpgQuKEn6vCoHUG1x8PTt0VniscrvG8gSp0hke4OW5jciN0maBxm9QQ"
 		base_api_url = 'https://canvas.case.edu/api'
 		rc = RequestContext(oauth_token, base_api_url, timeout=60)
