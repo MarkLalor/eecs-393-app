@@ -84,12 +84,14 @@ function populateCourseItems(aCourseID, courseItemJSON) {
 
 	// basically the table look up: courseItems = getTable(courseID)
 	for (var i in courseItemJSON) {
+		console.log
 		if (i == courseID) {
 			courseItems = courseItemJSON[i];
+			console.log("courseItemJSON[i] ", courseItemJSON[i])
 			break;
 		}
 	}
-	
+	console.log('courseItems' + courseItems);
 	// clear current list
 	while (courseItemDiv.firstChild) {
    	 	courseItemDiv.removeChild(courseItemDiv.firstChild);
@@ -97,20 +99,30 @@ function populateCourseItems(aCourseID, courseItemJSON) {
 
 	for (var i in courseItems) {
 		// Create tag
+		var courseItemID = 0;
 		var courseItemTag = document.createElement('p');
 		courseItemTag.innerHTML = createCourseItemString(courseItems, i);
 		courseItemTag.id = courseID; // id is the courseID
 		courseItemTag.class = courseItems[i].courseItemId;
 		console.log("consolel loasdfad" + courseItemTag.class);
-		courseItemTag.addEventListener("click", populateCourseItemDescription(courseID, courseItemJSON, courseItems[i].courseItemId));
+		
 
 		// Append to div
 		courseItemDiv.appendChild(courseItemTag);
+		console.log("test" , courseItemJSON[courseID])
+		courseItemID = courseItems[i].courseItemId;
+		(function(_courseItemID) {
+			courseItemTag.addEventListener("click", function(){populateCourseItemDescription(courseID, courseItemJSON, _courseItemID)});	
+		})(courseItemID);
+		
 	}
 }
 
+
 // Mostly just copy and pasted, logic should be relooked at
 function populateCourseItemDescription(aCourseID, courseItemJSON, aCourseItemID) {
+	
+
 	console.log(aCourseID + " " + aCourseItemID)
 	var courseID = aCourseID
 	var courseItemID = aCourseItemID
@@ -124,8 +136,11 @@ function populateCourseItemDescription(aCourseID, courseItemJSON, aCourseItemID)
 				if (courseItemJSON[i][j].courseItemId == courseItemID){
 					console.log("enters the deepest levels");
 					courseItems = courseItemJSON[i][j];
+					break;
 				}
+
 			}
+			break;
 		}
 	}
 	
@@ -141,7 +156,7 @@ function populateCourseItemDescription(aCourseID, courseItemJSON, aCourseItemID)
 		// Create tag
 		var courseItemTag = document.createElement('p');
 		courseItemTag.innerHTML = i + ": " + courseItems[i];
-		courseItemTag.class = "courseItemDescription"
+		courseItemTag.className += "courseItemDescription"
 		//console.log(courseItemTag.innerHTML)
 		// Append to div
 		courseItemDes.appendChild(courseItemTag);
