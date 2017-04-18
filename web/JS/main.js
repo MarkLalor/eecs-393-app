@@ -29,7 +29,7 @@ function openCourseItems(courseID, course_item_list){
 
 	course_items = course_item_list[courseID];
 	//document.getElementById('courseid').value = courseID;
-	console.log(course_item_list)
+	//console.log(course_item_list)
 	
 	var correctedJSON;
 
@@ -76,9 +76,9 @@ DUMMY DATA
 **/
 function populateCourseItems(aCourseID, courseItemJSON) {
 	var courseID = aCourseID
-	console.log('Clicked on a course');
+	//console.log('Clicked on a course');
 	document.getElementById('courseid').value = courseID;
-	console.log(document.getElementById('courseid').value)
+	//console.log(document.getElementById('courseid').value)
 	var courseItems;
 	var courseItemDiv = document.getElementById("courseItems");
 
@@ -87,11 +87,11 @@ function populateCourseItems(aCourseID, courseItemJSON) {
 		console.log
 		if (i == courseID) {
 			courseItems = courseItemJSON[i];
-			console.log("courseItemJSON[i] ", courseItemJSON[i])
+			//console.log("courseItemJSON[i] ", courseItemJSON[i])
 			break;
 		}
 	}
-	console.log('courseItems' + courseItems);
+	//console.log('courseItems' + courseItems);
 	// clear current list
 	while (courseItemDiv.firstChild) {
    	 	courseItemDiv.removeChild(courseItemDiv.firstChild);
@@ -104,18 +104,23 @@ function populateCourseItems(aCourseID, courseItemJSON) {
 		courseItemTag.innerHTML = createCourseItemString(courseItems, i);
 		courseItemTag.id = courseID; // id is the courseID
 		courseItemTag.class = courseItems[i].courseItemId;
-		console.log("consolel loasdfad" + courseItemTag.class);
+		console.log("class is: ", courseItems[i].courseItemId);
+		console.log("also known as: ", courseItemTag.class);
+		//console.log("consolel loasdfad" + courseItemTag.class);
 		
 
 		// Append to div
 		courseItemDiv.appendChild(courseItemTag);
-		console.log("test" , courseItemJSON[courseID])
+		//console.log("test" , courseItemJSON[courseID])
 		courseItemID = courseItems[i].courseItemId;
 		(function(_courseItemID) {
 			courseItemTag.addEventListener("click", function(){populateCourseItemDescription(courseID, courseItemJSON, _courseItemID)});	
 		})(courseItemID);
 		
 	}
+
+	// Function in chat
+	getCourseItems();
 }
 
 
@@ -123,7 +128,7 @@ function populateCourseItems(aCourseID, courseItemJSON) {
 function populateCourseItemDescription(aCourseID, courseItemJSON, aCourseItemID) {
 	
 
-	console.log(aCourseID + " " + aCourseItemID)
+	//console.log(aCourseID + " " + aCourseItemID)
 	var courseID = aCourseID
 	var courseItemID = aCourseItemID
 	var courseItems;
@@ -135,7 +140,7 @@ function populateCourseItemDescription(aCourseID, courseItemJSON, aCourseItemID)
 			console.log("enters courseiD secitons");
 			for (var j in courseItemJSON[i]) {
 				if (courseItemJSON[i][j].courseItemId == courseItemID){
-					console.log("enters the deepest levels");
+					//console.log("enters the deepest levels");
 					courseItems = courseItemJSON[i][j];
 					break;
 				}
