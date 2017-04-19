@@ -48,25 +48,30 @@
     <div class="col-sm-3 col-lg-3">
       <nav class="navbar navbar-default navbar-fixed-side">
         <h2>Items Description</h2>
-
         <div id="courseItemDescriptions">
         </div>
         <div>
           <form action="{{ upload_url }}" method="POST" enctype="multipart/form-data">
-  Upload File: <input type="file" name="file"><br>
-  <input type="hidden" name="courseitemid" id="courseitemid" />
-  <input type="submit" name="submit" value="Submit">
-</form>
-</div>
+            Upload File: <input type="file" name="file"><br>
+            <input type="hidden" name="courseitemid" id="courseitemid" />
+            <input type="submit" name="submit" value="Submit">
+          </form>
+        </div>
       </nav>
     </div>
     <div class="col-sm-3 col-lg-5 chat">
       <nav class="navbar navbar-default navbar-fixed-side">
         <h2>Chat</h2>
         <!-- Messages container -->
-        <input id="chattext" type="text" placeholder="Message"><br/>
-        <button id="chatpost">Post</button><br/>
-        <div id="chatresults"></div>
+        <div id="messages-container">
+          <div id="messages-container-helper">
+          <div id="messages">
+              <span id="chatresults"></span>
+          </div>
+          <div id="message-form">
+            <input id="chattext" type="text" placeholder="Message"><br/>
+            <button id="chatpost">Send</button><br/>
+          </div>
       </nav>
       </div>
     </div>

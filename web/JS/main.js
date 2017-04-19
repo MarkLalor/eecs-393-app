@@ -19,7 +19,7 @@ function openCourseItems(courseID, course_item_list){
 	var addClass = "highlight";
 
 	$(".courses").removeClass(addClass);
-	$("#" + courseID).addClass(addClass)
+	$("#" + courseID).addClass(addClass);
 
 	// var courses = document.getElementsByClassName("courses");
 
@@ -160,6 +160,7 @@ function populateCourseItemDescription(aCourseID, courseItemJSON, aCourseItemID)
 		}
 */
 
+
 	//console.log(aCourseID + " " + aCourseItemID)
 	var courseID = aCourseID
 	var courseItemID = aCourseItemID
@@ -168,8 +169,6 @@ function populateCourseItemDescription(aCourseID, courseItemJSON, aCourseItemID)
 	document.getElementById("courseitemid").value = courseItemID;
 
 	console.log(courseItemJSON)
-
-
 
 	for (var i in courseItemJSON) {
 		if (i == courseID) {
