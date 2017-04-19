@@ -1,17 +1,13 @@
-#messages-container {
+main, #messages-card {
   height: 80%;
   padding-bottom: 0;
-  margin-top: 15px;
-  min-height: 0;
-  background: linear-gradient(white, #f9f9f9);
-  justify-content: space-between;
 }
-
-#messages-container-helper {
-  width: auto;
-  height: 100%;
-  padding-top: 0;
+#messages-card-container {
+  height: calc(100% - 150px);
   padding-bottom: 0;
+}
+#messages-card {
+  margin-top: 15px;
 }
 
 #messages {
@@ -20,7 +16,7 @@
   height: calc(100% - 80px);
 }
 
-#chatresults {
+#message-filler {
   flex-grow: 1;
 }
 
@@ -31,7 +27,7 @@
 .message-container {
   display: block;
   margin-top: 10px;
-  border-top: 2px solid #f3f3f3;
+  border-top: 1px solid #f3f3f3;
   padding-top: 10px;
   opacity: 0;
   transition: opacity 1s ease-in-out;
@@ -51,27 +47,36 @@
   display: inline-block;
   width: 100%;
   padding-left: 40px;
+  color: #bbb;
   font-style: italic;
   font-size: 12px;
   box-sizing: border-box;
 }
 
-#message-form {
-  display: flex;
-  flex-direction: row;
-  float: left;
-  margin-left: 20px;
+.mdl-layout__header-row span {
+  margin-left: 15px;
+  margin-top: 17px;
+}
+.mdl-grid {
+  max-width: 1024px;
+  margin: auto;
 }
 
-#chattext {
-  width: 300px;
+.mdl-layout__header-row {
+  padding: 0;
+  margin: 0 auto;
+}
+.mdl-card__supporting-text {
+  width: auto;
+  height: 100%;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
-#chatpost {
-  width: 100px;
-  margin-left: 20px;
+.mdl-card {
+  min-height: 0;
 }
-
-.highlight2 {
-  background-color: yellow;
+.mdl-card {
+  background: linear-gradient(white, #f9f9f9);
+  justify-content: space-between;
 }

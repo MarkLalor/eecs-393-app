@@ -1,3 +1,23 @@
+
+function validateForm() {
+	var name = document.getElementById("assignmentName");
+	var description = document.getElementById("assignmentDescription");
+	var assignDate = document.getElementById("assignDate");
+	var dueDate = document.getElementById("dueDate");
+	if (name.value == null || name.value=="" || description.value==null || description.value=="") {
+		alert("Please Fill All Required Field");
+	    return false;
+	}
+    else if (!Date.parse(assignDate.value) || !Date.parse(dueDate.value)) {
+		alert("Please Fill All Required Field");
+	    return false;
+   	}
+   	else {
+
+    	return true;
+   	}
+}
+
 /** Appends Courses to the Course section Expecting JSON:
 {
 	courseID: [
@@ -25,7 +45,7 @@ function openCourseItems(courseID, course_item_list){
 	var addClass = "highlight";
 
 	$(".courses").removeClass(addClass);
-	$("#" + courseID).addClass(addClass)
+	$("#" + courseID).addClass(addClass);
 
 	// var courses = document.getElementsByClassName("courses");
 
@@ -257,6 +277,7 @@ function populateCourseItemDescription(aCourseID, courseItemJSON, aCourseItemID)
 		}
 */
 
+
 	//console.log(aCourseID + " " + aCourseItemID)
 	var courseID = aCourseID
 	var courseItemID = aCourseItemID
@@ -265,8 +286,6 @@ function populateCourseItemDescription(aCourseID, courseItemJSON, aCourseItemID)
 	document.getElementById("courseitemid").value = courseItemID;
 
 	console.log(courseItemJSON)
-
-
 
 	for (var i in courseItemJSON) {
 		if (i == courseID) {
