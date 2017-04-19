@@ -1,3 +1,18 @@
+
+function validateForm() {
+	var name = document.getElementById("assignmentName");
+	var description = document.getElementById("assignmentDescription");
+
+	if (name.value == null || name.value=="" || description.value==null || description.value=="") {
+		alert("Please Fill All Required Field");
+	    return false;
+	}
+    else {
+    	return true;
+    }
+
+}
+
 /** Appends Courses to the Course section Expecting JSON:
 {
 	courseID: [

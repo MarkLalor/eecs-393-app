@@ -12,3 +12,20 @@ h2{
 	background-color: yellow;
 }
 
+.assignment_block {
+	position: relative;
+	left: 15px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.assignment_block_last {
+	position: relative;
+	margin-top: 5px;
+	left: 15px;
+}
+
+.assignment_block_title {
+	position: relative;
+	left: 5px;
+}

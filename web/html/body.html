@@ -20,25 +20,26 @@
       <nav class="navbar navbar-default navbar-fixed-side">
         <h2>Course Items</h2>
         <div>
-          <form action="/add_assignment" method="POST">Assignment Name:
+          <form action="/add_assignment" onsubmit="return validateForm()" method="POST">
+            <span class="assignment_block_title"> Assignment Name: </span>
             <br>
-            <input type="text" name="assignmentname">
+            <input id="assignmentName" class="assignment_block" type="text" name="assignmentname">
             <br>
-            Description:
+            <span class="assignment_block_title"> Description: </span>
             <br>
-            <input type="text" name="description" >
+            <input id="assignmentDescription" class="assignment_block" type="text" name="description" >
             <br>
-            Assigned Date:
+            <span class="assignment_block_title"> Assigned Date: </span>
             <br>
-            <input type="text" name="assigneddate" >
+            <input type="date" class="assignment_block" type="text" name="assigneddate" >
             <br>
-            Due Date:
+            <span class="assignment_block_title"> Due Date: </span>
             <br>
-            <input type="text" name="duedate" >
+            <input type="date" class="assignment_block_last" type="text" name="duedate" >
             <br>
             <br>
             <input type="hidden" name="courseid" id="courseid" />
-            <input type="submit" value="Submit">
+            <input class="assignment_block" type="submit" value="Submit">
           </form> 
         </div>
         <div id="courseItems">
@@ -51,10 +52,12 @@
         <div id="courseItemDescriptions">
         </div>
         <div>
-          <form action="{{ upload_url }}" method="POST" enctype="multipart/form-data">
-            Upload File: <input type="file" name="file"><br>
-            <input type="hidden" name="courseitemid" id="courseitemid" />
-            <input type="submit" name="submit" value="Submit">
+          <form class="assignment_block_title" action="{{ upload_url }}" method="POST" enctype="multipart/form-data">
+            Upload File: 
+            <input class ="assignment_block" type="file" name="file">
+            <!-- <br> -->
+            <input  type="hidden" name="courseitemid" id="courseitemid" />
+            <input class="assignment_block_last" type="submit" name="submit" value="Submit">
           </form>
         </div>
       </nav>
