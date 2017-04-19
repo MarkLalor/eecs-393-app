@@ -83,7 +83,7 @@ class DatastoreTestCase(unittest.TestCase):
             TestModel.blob_key == blobkey)
         results = query.fetch(2)
         self.assertEqual(1, len(results))
-        self.assertEqual(blobkey, results[0].blobkey)
+        self.assertEqual(blobkey, results[0].blob_key)
     # [END datastore_example_filter]
 
     # [START datastore_example_memcache]
