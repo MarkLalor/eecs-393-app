@@ -59,8 +59,8 @@ class CourseItemUpload(webapp2.RequestHandler):
         username = users.get_current_user().nickname().split("@")[0]
         print username
 
-        adatetime_object = datetime.datetime.strptime(assigned_date, '%m/%d/%Y')
-        ddatetime_object = datetime.datetime.strptime(due_date, '%m/%d/%Y')
+        adatetime_object = datetime.datetime.strptime(assigned_date, '%Y-%m-%d')
+        ddatetime_object = datetime.datetime.strptime(due_date, '%Y-%m-%d')
 
         courseitem = CourseItem(
             courseItemID= courseItemid,

@@ -33,6 +33,8 @@ class MainPage(webapp2.RequestHandler):
 		#log in requirement as a handler in the yaml file
 		#additional failsafe here, can be removed
 		upload_url = blobstore.create_upload_url('/upload_document')
+		print("printing upload_url")
+		print(upload_url)
 		if not user:
 			login_url = users.create_login_url('/')
 			self.redirect(login_url)

@@ -28,13 +28,13 @@
             <br>
             <input type="text" name="description" >
             <br>
-            Assigned Date:
+            Assigned Date: (MM/DD/YYYY)
             <br>
-            <input type="text" name="assigneddate" >
+            <input type="date" name="assigneddate" >
             <br>
-            Due Date:
+            Due Date: (MM/DD/YYYY)
             <br>
-            <input type="text" name="duedate" >
+            <input type="date" name="duedate" >
             <br>
             <br>
             <input type="hidden" name="courseid" id="courseid" />
@@ -52,12 +52,17 @@
         <div id="courseItemDescriptions">
         </div>
         <div>
+  <h2>Documents</h2>
+</div>
+        <div>
           <form action="{{ upload_url }}" method="POST" enctype="multipart/form-data">
   Upload File: <input type="file" name="file"><br>
   <input type="hidden" name="courseitemid" id="courseitemid" />
   <input type="submit" name="submit" value="Submit">
 </form>
 </div>
+<div id="documents">
+  </div>
       </nav>
     </div>
     <div class="col-sm-3 col-lg-5 chat">
