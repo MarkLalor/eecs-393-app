@@ -197,6 +197,9 @@ function populateCourseItemDescription(aCourseID, courseItemJSON, aCourseItemID)
 		if(i == "courseItemId") {
 			continue;
 		}
+		if(i == "documents"){
+			continue;
+		}
 		// Create tag
 		var courseItemTag = document.createElement('p');
 		courseItemTag.innerHTML = i + ": " + courseItems[i];
