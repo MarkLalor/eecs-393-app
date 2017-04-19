@@ -1,13 +1,14 @@
 p{
 	padding: 5px 3px 5px 8px;
 	font-family: 'Inconsolata', monospace;
+	cursor: pointer;
 }
 h2{
 	font-family: 'Antic Slab', serif;
 	font-size:250%;
 }
+
 .highlight {
 	background-color: yellow;
-	cursor: pointer;
 }
 

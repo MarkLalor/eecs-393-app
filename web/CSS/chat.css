@@ -1,0 +1,14 @@
+#chattext {
+	position: absolute;
+	height: 40px;
+	bottom: 130px;
+	left: 50px;
+}
+
+#chatpost {
+	position: absolute;
+	height: 40px;
+	left: 250px;
+	width: 50px;
+	bottom: 130px;
+}

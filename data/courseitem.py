@@ -39,7 +39,6 @@ class CourseItem(db.Model):
                 "due_date":str(self.due_date.isoformat()),
                 "documents":list(self.documents)}
         return json_rep
-
 class CourseItemUpload(webapp2.RequestHandler):
     def post(self):
         user = users.get_current_user()
