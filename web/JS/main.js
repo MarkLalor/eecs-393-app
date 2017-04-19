@@ -12,6 +12,12 @@
 
 function openCourseItems(courseID, course_item_list){
 	console.log('clicking on open courseItem');
+	//document.getElementById("courseItemDescription").value = ""
+	var elements = document.getElementsByClassName('courseItemDescription');
+    while(elements.length > 0){
+        elements[0].parentNode.removeChild(elements[0]);
+    }
+
 
 
 	course = document.getElementById(courseID);
@@ -192,6 +198,8 @@ function populateCourseItemDescription(aCourseID, courseItemJSON, aCourseItemID)
    	 	courseItemDes.removeChild(courseItemDes.firstChild);
 	}
 
+
+
 	for (var i in courseItems) {
 		if(i == "courseItemId") {
 			continue;
@@ -208,6 +216,13 @@ function populateCourseItemDescription(aCourseID, courseItemJSON, aCourseItemID)
 		courseItemDes.appendChild(courseItemTag);
 		}
 
+/*
+	(function(_courseItemID) {
+			courseItemTag.addEventListener("click", function(){populateCourseItemDescription(courseID, courseItemJSON, _courseItemID)});	
+		})(courseItemID);
+		
+	}
+*/
 
 }
 
