@@ -31,8 +31,9 @@ function openCourseItems(courseID, course_item_list){
 
 	course_items = course_item_list[courseID];
 	//document.getElementById('courseid').value = courseID;
-	console.log(course_item_list)
-
+	//console.log(course_item_list)
+	
+	var correctedJSON;
 
 	populateCourseItems(courseID,course_item_list);
 	
@@ -77,9 +78,9 @@ DUMMY DATA
 **/
 function populateCourseItems(aCourseID, courseItemJSON) {
 	var courseID = aCourseID
-	console.log('Clicked on a course');
+	//console.log('Clicked on a course');
 	document.getElementById('courseid').value = courseID;
-	console.log(document.getElementById('courseid').value)
+	//console.log(document.getElementById('courseid').value)
 	var courseItems;
 	var courseItemDiv = document.getElementById("courseItems");
 
@@ -92,12 +93,11 @@ function populateCourseItems(aCourseID, courseItemJSON) {
 		//console.log(courseItemJSON[i])
 		if (i == courseID) {
 			courseItems = courseItemJSON[i];
-			console.log("courseItemJSON[i] ", courseItemJSON[i])
+			//console.log("courseItemJSON[i] ", courseItemJSON[i])
 			break;
 		}
 	}
-
-	console.log('courseItems' + courseItems);
+	//console.log('courseItems' + courseItems);
 	// clear current list
 	while (courseItemDiv.firstChild) {
    	 	courseItemDiv.removeChild(courseItemDiv.firstChild);
@@ -124,11 +124,15 @@ function populateCourseItems(aCourseID, courseItemJSON) {
 		courseItemDiv.appendChild(courseItemTag);
 		//console.log("test" , courseItemJSON[courseID])
 		courseItemID = correctedJSON.courseItemId;
+
 		(function(_courseItemID) {
 			courseItemTag.addEventListener("click", function(){populateCourseItemDescription(courseID, courseItemJSON, _courseItemID)});	
 		})(courseItemID);
 		
 	}
+
+	// Function in chat
+	getCourseItems();
 }
 
 
@@ -156,7 +160,7 @@ function populateCourseItemDescription(aCourseID, courseItemJSON, aCourseItemID)
 		}
 */
 
-	console.log(aCourseID + " " + aCourseItemID)
+	//console.log(aCourseID + " " + aCourseItemID)
 	var courseID = aCourseID
 	var courseItemID = aCourseItemID
 	var courseItems;
