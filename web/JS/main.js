@@ -2,15 +2,20 @@
 function validateForm() {
 	var name = document.getElementById("assignmentName");
 	var description = document.getElementById("assignmentDescription");
-
+	var assignDate = document.getElementById("assignDate");
+	var dueDate = document.getElementById("dueDate");
 	if (name.value == null || name.value=="" || description.value==null || description.value=="") {
 		alert("Please Fill All Required Field");
 	    return false;
 	}
-    else {
-    	return true;
-    }
+    else if (!Date.parse(assignDate.value) || !Date.parse(dueDate.value)) {
+		alert("Please Fill All Required Field");
+	    return false;
+   	}
+   	else {
 
+    	return true;
+   	}
 }
 
 /** Appends Courses to the Course section Expecting JSON:
