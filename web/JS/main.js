@@ -11,6 +11,7 @@
 **/
 
 function openCourseItems(courseID, course_item_list){
+	console.log('clicking on open courseItem');
 
 
 	course = document.getElementById(courseID);
@@ -26,12 +27,12 @@ function openCourseItems(courseID, course_item_list){
 	// 	courses[x].removeClass(addClass)
 		
 	// }
+	console.log(courseID)
 
 	course_items = course_item_list[courseID];
 	//document.getElementById('courseid').value = courseID;
 	console.log(course_item_list)
-	
-	var correctedJSON;
+
 
 	populateCourseItems(courseID,course_item_list);
 	
@@ -83,14 +84,19 @@ function populateCourseItems(aCourseID, courseItemJSON) {
 	var courseItemDiv = document.getElementById("courseItems");
 
 	// basically the table look up: courseItems = getTable(courseID)
+	console.log("printing out the json part")
+	console.log(courseItemJSON)
+
 	for (var i in courseItemJSON) {
-		console.log
+		//console.log("printing out the json part")
+		//console.log(courseItemJSON[i])
 		if (i == courseID) {
 			courseItems = courseItemJSON[i];
 			console.log("courseItemJSON[i] ", courseItemJSON[i])
 			break;
 		}
 	}
+
 	console.log('courseItems' + courseItems);
 	// clear current list
 	while (courseItemDiv.firstChild) {
@@ -98,19 +104,26 @@ function populateCourseItems(aCourseID, courseItemJSON) {
 	}
 
 	for (var i in courseItems) {
+		console.log(courseItems);
+		console.log(i);
+		var correctedJSON = JSON.parse(courseItems[i]);
+		console.log(correctedJSON)
+		console.log(correctedJSON.name)
+
+		console.log("printing courseitem in json")
 		// Create tag
 		var courseItemID = 0;
 		var courseItemTag = document.createElement('p');
-		courseItemTag.innerHTML = createCourseItemString(courseItems, i);
+		courseItemTag.innerHTML = correctedJSON.name
 		courseItemTag.id = courseID; // id is the courseID
-		courseItemTag.class = courseItems[i].courseItemId;
+		courseItemTag.class = correctedJSON.courseItemId;
 		console.log("consolel loasdfad" + courseItemTag.class);
 		
 
 		// Append to div
 		courseItemDiv.appendChild(courseItemTag);
-		console.log("test" , courseItemJSON[courseID])
-		courseItemID = courseItems[i].courseItemId;
+		//console.log("test" , courseItemJSON[courseID])
+		courseItemID = correctedJSON.courseItemId;
 		(function(_courseItemID) {
 			courseItemTag.addEventListener("click", function(){populateCourseItemDescription(courseID, courseItemJSON, _courseItemID)});	
 		})(courseItemID);
@@ -121,7 +134,27 @@ function populateCourseItems(aCourseID, courseItemJSON) {
 
 // Mostly just copy and pasted, logic should be relooked at
 function populateCourseItemDescription(aCourseID, courseItemJSON, aCourseItemID) {
-	
+/*
+	console.log(courseItemJSON)
+	var courseItemDes = document.getElementById("courseItemDescriptions");
+	document.getElementById("courseitemid").value = aCourseItemID;
+
+	for (var i in courseItemJSON) {
+		if(i == "courseItemId") {
+			continue;
+		}
+		if(i == "documents"){
+			continue;
+		}
+		// Create tag
+		var courseItemTag = document.createElement('p');
+		courseItemTag.innerHTML = i + ": " + courseItemJSON[i];
+		courseItemTag.className += "courseItemDescription"
+		//console.log(courseItemTag.innerHTML)
+		// Append to div
+		courseItemDes.appendChild(courseItemTag);
+		}
+*/
 
 	console.log(aCourseID + " " + aCourseItemID)
 	var courseID = aCourseID
@@ -130,13 +163,19 @@ function populateCourseItemDescription(aCourseID, courseItemJSON, aCourseItemID)
 	var courseItemDes = document.getElementById("courseItemDescriptions");
 	document.getElementById("courseitemid").value = courseItemID;
 
+	console.log(courseItemJSON)
+
+
+
 	for (var i in courseItemJSON) {
 		if (i == courseID) {
 			console.log("enters courseiD secitons");
 			for (var j in courseItemJSON[i]) {
-				if (courseItemJSON[i][j].courseItemId == courseItemID){
+				console.log(courseItemJSON[i][j])
+				var prettyjson = JSON.parse(courseItemJSON[i][j])
+				if (prettyjson.courseItemId == courseItemID){
 					console.log("enters the deepest levels");
-					courseItems = courseItemJSON[i][j];
+					courseItems = prettyjson;
 					break;
 				}
 
@@ -163,6 +202,7 @@ function populateCourseItemDescription(aCourseID, courseItemJSON, aCourseItemID)
 		courseItemDes.appendChild(courseItemTag);
 		}
 
+
 }
 
 // Creates the string for the user
@@ -186,6 +226,8 @@ function createCoursesString(courseJSON, i) {
 }
 
 function createCourseItemString(courseItem, i) {
+	console.log(courseItem)
+	console.log(i)
 	return courseItem[i].name;
 }
 
