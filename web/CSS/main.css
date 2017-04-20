@@ -29,3 +29,13 @@ h2{
 	position: relative;
 	left: 5px;
 }
+
+.upload_input_container {
+	display: inline-flex;
+	margin-bottom: 20px;
+}
+
+#documents {
+	position: relative;
+	left: 10px;
+}

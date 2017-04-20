@@ -1,3 +1,4 @@
+setUp();
 
 function validateForm() {
 	var name = document.getElementById("assignmentName");
@@ -16,6 +17,16 @@ function validateForm() {
 
     	return true;
    	}
+}
+
+function setUp () {
+	var x = document.getElementById("courses");
+	if (x.firstElementChild) {
+		console.log(x.firstElementChild);
+		console.log("hello");
+		x.firstElementChild.click();
+	}
+
 }
 
 /** Appends Courses to the Course section Expecting JSON:

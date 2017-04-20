@@ -166,7 +166,8 @@ function attachListener() {
 		var msg = snapshot.val();
 
 		var msgUsernameElement = document.createElement("div");
-		msgUsernameElement.innerHTML = msg.username;
+
+		msgUsernameElement.innerHTML = msg.username.substring(0, msg.username.indexOf('@'));
 		msgUsernameElement.class = "name";
 		$(msgUsernameElement).css("position", "relative");
 		$(msgUsernameElement).css("left", "10px");
