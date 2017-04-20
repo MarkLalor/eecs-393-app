@@ -40,9 +40,7 @@ h2{
 	left: 10px;
 }
 
-.ribbon {
-   position: relative;
-   top: -16px;
-   right: -706px;
+.navbar-default {
+	background-image: none;
 }
 
