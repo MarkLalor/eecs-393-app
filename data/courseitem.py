@@ -28,15 +28,20 @@ class CourseItem(db.Model):
     def getJSONRepresentation(self):
         #0: [{ courseItemId: 0, creator: "BOB", creationTime: "10/0/2017", name: "Assignment", body: "shared memory assignment", assigned_date: "10/2/2017", due_date: "10/25/2017"},
         integernum = int(self.courseItemID)
-        print integernum
         json_rep = {"courseItemId":int(self.courseItemID),
                 #"courseID": int(self.courseID),
-                "creator": str(self.creator),
-                "creationTime": str(self.creationTime.isoformat()),
-                "name":str(self.name),
-                "body":str(self.body),
-                "assigned_date":str(self.assigned_date.isoformat()),
-                "due_date":str(self.due_date.isoformat()),
+                "Creator": str(self.creator),
+                "Time Created": str(str(self.creationTime.month) + "/" + 
+                    str(self.creationTime.day) + "/" + str(self.creationTime.year) + " " +
+                    str(self.creationTime.hour)+":"+str(self.creationTime.minute)),
+                "Name":str(self.name),
+                "Description":str(self.body),
+                "Assigned Date":str(str(self.assigned_date.month) + "/" + 
+                    str(self.assigned_date.day) + "/" + str(self.assigned_date.year) + " " +
+                    str(self.assigned_date.hour)+":"+str(self.assigned_date.minute)),
+                "Due Date":str(str(self.due_date.month) + "/" + 
+                    str(self.due_date.day) + "/" + str(self.due_date.year) + " " +
+                    str(self.due_date.hour)+":"+str(self.due_date.minute)),
                 "documents":list(self.documents)}
 
         return json.dumps(json_rep)

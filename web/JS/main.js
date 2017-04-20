@@ -155,10 +155,9 @@ function populateCourseItems(aCourseID, courseItemJSON) {
 		// Create tag
 		var courseItemID = 0;
 		var courseItemTag = document.createElement('p');
-		courseItemTag.innerHTML = correctedJSON.name
+		courseItemTag.innerHTML = correctedJSON.Name
 		courseItemTag.id = courseID; // id is the courseID
 		courseItemTag.class = correctedJSON.courseItemId;
-		console.log("consolel loasdfad" + courseItemTag.class);
 		
 
 		// Append to div
