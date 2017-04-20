@@ -183,13 +183,25 @@ function attachListener() {
 		$(msgElement).addClass("message-container");
 		$(msgElement).addClass("visible");
 
+
+		$(msgElement).css("width", "400px");
+
+
+
 		var msgUser = usernameInput.innerHTML;
 		var userName = splitUsername(msgUser);
 
+
+		$(msgUsernameElement).css("width", "340px");
+		$(msgTextElement).css("width", "340px");
+
+		msgElement.appendChild(msgUsernameElement);
+		msgElement.appendChild(msgTextElement);
+
 		if (msg.username == userName) {
 			// This users text (push it left)
-			$(msgUsernameElement).css("left", "350px");
-			$(msgTextElement).css("left", "360px");
+			$(msgUsernameElement).parent().closest('div').css("float", "right");
+			$(msgTextElement).parent().closest('div').css("float", "right");
 
 
 		}
@@ -197,8 +209,7 @@ function attachListener() {
 			// Not users text (push it slightly left)
 			//$(msgElement).css("left", "10px");
 		}
-		msgElement.appendChild(msgUsernameElement);
-		msgElement.appendChild(msgTextElement);
+		
 
 		document.getElementById("chatresults").appendChild(msgElement);
 	});
