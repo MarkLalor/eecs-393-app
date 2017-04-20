@@ -23,7 +23,7 @@ class CourseItem(db.Model):
     assigned_date = db.DateTimeProperty()
     due_date = db.DateTimeProperty()
 
-    documents = db.ListProperty(item_type=blobstore.BlobKey,default=[]) # list of document IDs [see documentID of class Document(db.Model)]
+    documents = db.ListProperty(str,default=[]) # list of document IDs [see documentID of class Document(db.Model)]
 
     def getJSONRepresentation(self):
         #0: [{ courseItemId: 0, creator: "BOB", creationTime: "10/0/2017", name: "Assignment", body: "shared memory assignment", assigned_date: "10/2/2017", due_date: "10/25/2017"},
@@ -38,7 +38,8 @@ class CourseItem(db.Model):
                 "assigned_date":str(self.assigned_date.isoformat()),
                 "due_date":str(self.due_date.isoformat()),
                 "documents":list(self.documents)}
-        return json_rep
+
+        return json.dumps(json_rep)
 
 class CourseItemUpload(webapp2.RequestHandler):
     def post(self):
@@ -58,8 +59,8 @@ class CourseItemUpload(webapp2.RequestHandler):
         username = users.get_current_user().nickname().split("@")[0]
         print username
 
-        adatetime_object = datetime.datetime.strptime(assigned_date, '%m/%d/%Y')
-        ddatetime_object = datetime.datetime.strptime(due_date, '%m/%d/%Y')
+        adatetime_object = datetime.datetime.strptime(assigned_date, '%Y-%m-%d')
+        ddatetime_object = datetime.datetime.strptime(due_date, '%Y-%m-%d')
 
         courseitem = CourseItem(
             courseItemID= courseItemid,
