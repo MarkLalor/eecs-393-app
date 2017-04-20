@@ -1,4 +1,4 @@
-setUp();
+window.setTimeout(setUp, 500);
 
 function validateForm() {
 	var name = document.getElementById("assignmentName");
@@ -173,6 +173,7 @@ function populateCourseItems(aCourseID, courseItemJSON) {
 	}
 
 	// Function in chat
+	console.log("This is populating");
 	getCourseItems();
 }
 
