@@ -35,8 +35,9 @@ class MainPage(webapp2.RequestHandler):
 		caseID = user.nickname().split("@")[0]
 		nickname = user.nickname()
 
-		oauth_token = OAUTH_TOKEN_LIST[caseID]
-		if not oauth_token:
+		if caseID in OAUTH_TOKEN_LIST.keys():
+			oauth_token = OAUTH_TOKEN_LIST[caseID]	
+		else:
 			oauth_token = OAUTH_TOKEN_LIST['vxs215']
 
 		base_api_url = 'https://canvas.case.edu/api'
