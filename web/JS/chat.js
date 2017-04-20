@@ -187,7 +187,7 @@ function attachListener() {
 		$(msgElement).css("width", "400px");
 
 
-
+ 
 		var msgUser = usernameInput.innerHTML;
 		var userName = splitUsername(msgUser);
 
