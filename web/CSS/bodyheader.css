@@ -7,3 +7,7 @@ h1{
    right:10px;
    top:5px;
 }
+
+#content{
+	display:inline-flex;
+}

@@ -39,3 +39,10 @@ h2{
 	position: relative;
 	left: 10px;
 }
+
+.ribbon {
+   position: relative;
+   top: -16px;
+   right: -706px;
+}
+

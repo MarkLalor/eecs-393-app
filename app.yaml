@@ -1,7 +1,7 @@
-application: eecs-393-app
-version: 1
+#application: eecs-393-app
+#version: 1
 runtime: python27
-api_version: 1
+#api_version: 1
 threadsafe: true
 
 handlers:
@@ -22,6 +22,8 @@ handlers:
   static_dir: web/JS
 - url: /stylesheet
   static_dir: web/CSS
+- url: /images
+  static_dir: images
 - url: /
   script: main.app
   login: required
