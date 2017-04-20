@@ -15,20 +15,35 @@ from canvas_sdk.methods import users as canvas_users
 from data.student import Student
 from data.course import Course
 from data.courseitem import CourseItem
+from random import randint
 
 import jinja2
 
+OAUTH_TOKEN_LIST = {
+	"vxs215" : "5590~AiNzEe2sqfpgQuKEn6vCoHUG1x8PTt0VniscrvG8gSp0hke4OW5jciN0maBxm9QQ", #vimig
+	"sam274":"5590~vWLHNZnYftuklmDGxti7Mo7Xvi25o3HpjlDRiRwlK9KBzVj2UxhNEsZoDX6RZYxD", #stephen
+	"eaf53": "5590~ObS2t1n5sI3ROknzhtgYY3pZ29DdbINz4JBV6E8eQC0AjRgAldCbb7meylvfrRWK", #ethan
+	"yfm": "5590~yZZea5tLKykn5iPbu8HykFEMQLl2WM3RUR185VYculffDXV7JsOlS1jJJ8Ed0dZk", #yousef
+	"mmh124": "5590~IXIFbF2Bs4DPMjRisp0EKaz5k6dM6pNQzyoSnHIMz12m2spWpBGBlahhZqtLrg99", #Haus
+	"dxb" : "5590~eRWgUDGbDMy6SXJObBiici05IAu12K8h1cTartJHPFzCTVe2KLdaxvktbf1BOru5", #dina
+}
 ''' python dev_appserver.py C://Vimig/SoftwareEng/mainApp/eecs-393-app/app.yaml '''
 class MainPage(webapp2.RequestHandler):
 	def get(self):
-		test = self.request
-		print test
-		oauth_token = "5590~AiNzEe2sqfpgQuKEn6vCoHUG1x8PTt0VniscrvG8gSp0hke4OW5jciN0maBxm9QQ"
+
+		user = users.get_current_user()
+		caseID = user.nickname().split("@")[0]
+		nickname = user.nickname()
+
+		oauth_token = OAUTH_TOKEN_LIST[caseID]
 		base_api_url = 'https://canvas.case.edu/api'
+
+		cas_url = ""
+
 		rc = RequestContext(oauth_token, base_api_url, timeout=60)
 		rc2 = RequestContext(oauth_token, base_api_url, timeout=60)
 		#db.GqlQuery("SELECT * FROM Course WHERE courseID = :1", courseID).get()
-		user = users.get_current_user()
+		
 		print(user)
 		#log in requirement as a handler in the yaml file
 		#additional failsafe here, can be removed
@@ -40,8 +55,7 @@ class MainPage(webapp2.RequestHandler):
 			self.redirect(login_url)
 
 
-		caseID = user.nickname().split("@")[0]
-		nickname = user.nickname()
+		
 		q1 = Student.gql("WHERE caseID = :1", caseID)
 		returningUser = q1.get()
 
