@@ -39,3 +39,7 @@ h2{
 	position: relative;
 	left: 10px;
 }
+
+.navbar-default {
+	background-image: none;
+}
