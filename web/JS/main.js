@@ -45,9 +45,13 @@ function openCourseItems(courseID, course_item_list){
 	console.log('clicking on open courseItem');
 	//document.getElementById("courseItemDescription").value = ""
 	var elements = document.getElementsByClassName('courseItemDescription');
+	var elements2 = document.getElementById('documents')
     while(elements.length > 0){
         elements[0].parentNode.removeChild(elements[0]);
     }
+    while (elements2.firstChild) {
+   	 	elements2.removeChild(elements2.firstChild);
+	}
 
 
 
