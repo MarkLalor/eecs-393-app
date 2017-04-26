@@ -9,7 +9,10 @@ h2{
 }
 
 .highlight {
-	background-color: yellow;
+	background-color: grey;
+	background-color: #A9A9A9;
+    font-weight: 900;
+    -webkit-text-fill-color: white;
 }
 
 .assignment_block {
@@ -39,8 +42,3 @@ h2{
 	position: relative;
 	left: 10px;
 }
-
-.navbar-default {
-	background-image: none;
-}
-

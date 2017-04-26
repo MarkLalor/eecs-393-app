@@ -48,7 +48,6 @@ class MainPage(webapp2.RequestHandler):
 		rc2 = RequestContext(oauth_token, base_api_url, timeout=60)
 		#db.GqlQuery("SELECT * FROM Course WHERE courseID = :1", courseID).get()
 		
-		print(user)
 		#log in requirement as a handler in the yaml file
 		#additional failsafe here, can be removed
 		upload_url = blobstore.create_upload_url('/upload_document')
