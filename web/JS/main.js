@@ -1,15 +1,22 @@
 window.setTimeout(setUp, 500);
 
 function validateForm() {
-	var name = document.getElementById("assignmentName");
-	var description = document.getElementById("assignmentDescription");
-	var assignDate = document.getElementById("assignDate");
-	var dueDate = document.getElementById("dueDate");
-	if (name.value == null || name.value=="" || description.value==null || description.value=="") {
+	var name = document.getElementById("assignmentName").value;
+	var description = document.getElementById("assignmentDescription").value;
+	var assignDate = document.getElementById("assignDate").value;
+	var dueDate = document.getElementById("dueDate").value;
+	var courseItems = document.getElementById("courseItems").children;
+	for(var i =0; i<courseItems.length; i++){
+		if(courseItems[i].innerHTML == name){
+			alert("Course Item name already exists, please change it");
+	    	return false;
+		}
+	}
+	if (name == null || name=="" || description==null || description=="") {
 		alert("Please Fill All Required Field");
 	    return false;
 	}
-    else if (!Date.parse(assignDate.value) || !Date.parse(dueDate.value)) {
+    else if (!Date.parse(assignDate) || !Date.parse(dueDate)) {
 		alert("Please Fill All Required Field");
 	    return false;
    	}
