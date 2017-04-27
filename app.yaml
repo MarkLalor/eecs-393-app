@@ -24,6 +24,9 @@ handlers:
   static_dir: web/CSS
 - url: /images
   static_dir: images
+- url: /favicon\.ico
+  static_files: images/favicon.ico
+  upload: images/favicon\.ico
 - url: /
   script: main.app
   login: required
