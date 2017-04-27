@@ -1,5 +1,13 @@
 window.setTimeout(setUp, 500);
 
+function validateDocumentUploadForm(){
+	var courseItemID = document.getElementById("courseitemid").value
+	if(courseItemID == null || name == ""){
+		alert("Please click on Course Item that this document is related to and then upload.")
+		return false;
+	}
+}
+
 function validateForm() {
 	var name = document.getElementById("assignmentName").value;
 	var description = document.getElementById("assignmentDescription").value;
@@ -238,7 +246,7 @@ function populateDocuments(courseID, courseItemJSON, aCourseItemID){
 				//courseItemDes.appendChild(courseItemTag);
 				var link = document.createElement('a');
 				link.textContent = res[0];
-				link.href = 'http://localhost:8080/upload_view_document/' + res[1];
+				link.href = '/upload_view_document/' + res[1];
 				courseItemDes.appendChild(link);
 				linebreak = document.createElement("br")
 				courseItemDes.appendChild(linebreak)
