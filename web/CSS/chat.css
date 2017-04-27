@@ -74,5 +74,8 @@
 }
 
 .highlight2 {
-  background-color: yellow;
+  background-color: grey;
+  background-color: #A9A9A9;
+    font-weight: 900;
+    -webkit-text-fill-color: white;
 }

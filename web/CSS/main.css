@@ -9,10 +9,13 @@ h2{
 }
 
 .highlight {
-	background-color: yellow;
+	background-color: grey;
+	background-color: #A9A9A9;
+    font-weight: 900;
+    -webkit-text-fill-color: white;
 }
 
-.assignment_block {
+/*.assignment_block {
 	position: relative;
 	left: 15px;
 	margin-top: 5px;
@@ -29,7 +32,7 @@ h2{
 	position: relative;
 	left: 5px;
 }
-
+*/
 .upload_input_container {
 	display: inline-flex;
 	margin-bottom: 20px;
@@ -39,8 +42,3 @@ h2{
 	position: relative;
 	left: 10px;
 }
-
-.navbar-default {
-	background-image: none;
-}
-
