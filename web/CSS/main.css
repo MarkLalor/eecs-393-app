@@ -54,9 +54,15 @@ h2{
 
 .col-md-4 {
 	height:100vh;
-
-	
 }
+
+.panes {
+
+	style="overflow-y: auto;
+	 height:75%
+}
+
+
 @media (max-width: 992px) {
     .col-md-4 {
         height:initial;

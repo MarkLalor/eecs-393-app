@@ -7,13 +7,16 @@
       <div class="col-md-8">
         <div class="row match-my-cols">
           <div class="col-md-4">
+          <div class="container-fluid panes">
               <h2>Courses</h2>
               <div id="courses">
                 {% if courses and course_items %} {% for course in courses %}
                 <p class="courses" id="{{course.courseID}}" onclick="openCourseItems({{course.courseID}},{{course_items}})">{{course.name}}</p>{% endfor %} {% endif %}
               </div>
           </div>
+          </div>
           <div class="col-md-4" style="border-left-width: 2px; border-left-style: solid; border-left-color: #DDD;">
+          <div class="container-fluid panes">
               <h2>Course Items</h2>
               <div>
                 <form action="/add_assignment" method="post" onsubmit="return validateForm()">
@@ -26,30 +29,36 @@
                   <span class="assignment_block_title">Due Date:</span><br>
                   <input class="assignment_block_last" id="dueDate" name="duedate" type="text"><br>
                   <br>
-                  <input id="courseid" name="courseid" type="hidden"> <input class="assignment_block" type="submit" value="Submit">
+                  <input id="courseid" name="courseid" type="hidden"> 
+                  <input class="assignment_block btn" type="submit" value="Submit">
                 </form>
               </div>
               <div id="courseItems"></div>
           </div>
+          </div>
           <div class="col-md-4" style="border-left-width: 2px; border-left-style: solid; border-left-color: #DDD;">
+          <div class="container-fluid panes">
               <h2>Course Item Description</h2>
               <div id="courseItemDescriptions"></div>
               <div>
-                <h2>Documents</h2>
+                <h3>Documents</h3>
                 <form action="{{ upload_url }}" onsubmit="return validateDocumentUploadForm()" class="assignment_block_title" enctype="multipart/form-data" method="post">
                   Upload File:
-                  <div class="upload_input_container">
+                  <div>
                     <input class="assignment_block" name="file" type="file"> <!-- <br> -->
-                     <input id="courseitemid" name="courseitemid" type="hidden"> <input class="assignment_block_last" name="submit" type="submit" value="Submit">
+                     <input id="courseitemid" name="courseitemid" type="hidden"> 
+                     <input class="assignment_block_last btn" name="submit" type="submit" value="Submit" style="margin-left: 15px; margin-top: 15px;">
                   </div>
                 </form>
               </div>
               <div id="documents"></div>
+              </div>
           </div>
         </div>
       </div>
     
       <div class="col-md-4" style="border-left-width: 2px; border-left-style: solid; border-left-color: #DDD;">
+      <div class="container-fluid panes">
           <h2>Chat</h2><!-- Messages container -->
           <div id="messages-container">
             <div id="messages-container-helper">
@@ -58,10 +67,11 @@
               </div>
               <div id="message-form">
                 <input id="chattext" placeholder="Message" type="text"><br>
-                <button id="chatpost">Send</button><br>
+                <button id="chatpost" class="btn">Send</button><br>
               </div>
             </div>
           </div>
+      </div>
       </div>
     </div>
   </div>
