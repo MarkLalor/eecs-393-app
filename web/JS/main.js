@@ -2,7 +2,7 @@ window.setTimeout(setUp, 500);
 
 function validateDocumentUploadForm(){
 	var courseItemID = document.getElementById("courseitemid").value
-	if(courseItemID == null || name == ""){
+	if(courseItemID == null || courseItemID == ""){
 		alert("Please click on Course Item that this document is related to and then upload.")
 		return false;
 	}
