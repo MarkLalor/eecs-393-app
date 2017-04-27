@@ -176,8 +176,6 @@ class MainPage(webapp2.RequestHandler):
 	# 		print content_file.read() % parts
 	# 		request.response.out.write(content_file.read() % parts)
 	# 		request.response.out.write("\n")
-	print 'reached GET!!!!!!!!!!!!!!'
-
 	def RepresentsInt(self, s):
 	    try:
 	    	int(s)

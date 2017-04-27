@@ -3,11 +3,13 @@ h1{
 	font-size:500%;
 }
 #WelcomeMessage{
-   position:fixed;
-   right:10px;
-   top:5px;
+   position:relative;
+   /*right:10px;
+   top:5px;*/
+   float:right;
 }
 
 #content{
 	display:inline-flex;
 }
+
