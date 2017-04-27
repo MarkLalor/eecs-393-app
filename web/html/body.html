@@ -1,93 +1,70 @@
-{% extends "web/html/base.html" %}
+  {% extends "web/html/base.html" %}
 
-{% block body %}
+   {% block body %}
 
-<div class="container-fluid" style = "border-top: 5px solid #DDD;">
-  <div class="row">
-    <div class="col-sm-3 col-lg-2">
-      <nav class="navbar navbar-default navbar-fixed-side">
-        <h2>Courses</h2>
-        <div id="courses">
-        {% if courses and course_items %}
-          {% for course in courses %}
-            <p class="courses" id="{{course.courseID}}" onclick="openCourseItems({{course.courseID}},{{course_items}})">{{course.name}}</p>
-          {% endfor %}
-        {% endif %}
+  <div class="container-fluid" style="border-top: 5px solid #DDD;">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-4">
+              <h2>Courses</h2>
+              <div id="courses">
+                {% if courses and course_items %} {% for course in courses %}
+                <p class="courses" id="{{course.courseID}}" onclick="openCourseItems({{course.courseID}},{{course_items}})">{{course.name}}</p>{% endfor %} {% endif %}
+              </div>
+          </div>
+          <div class="col-md-4">
+              <h2>Course Items</h2>
+              <div>
+                <form action="/add_assignment" method="post" onsubmit="return validateForm()">
+                  <span class="assignment_block_title">Assignment Name:</span><br>
+                  <input class="assignment_block" id="assignmentName" name="assignmentname" type="text"><br>
+                  <span class="assignment_block_title">Description:</span><br>
+                  <input class="assignment_block" id="assignmentDescription" name="description" type="text"><br>
+                  <span class="assignment_block_title">Assigned Date:</span><br>
+                  <input class="assignment_block" id="assignDate" name="assigneddate" type="text"><br>
+                  <span class="assignment_block_title">Due Date:</span><br>
+                  <input class="assignment_block_last" id="dueDate" name="duedate" type="text"><br>
+                  <br>
+                  <input id="courseid" name="courseid" type="hidden"> <input class="assignment_block" type="submit" value="Submit">
+                </form>
+              </div>
+              <div id="courseItems"></div>
+          </div>
+          <div class="col-md-4">
+              <h2>Course Item Description</h2>
+              <div id="courseItemDescriptions"></div>
+              <div>
+                <h2>Documents</h2>
+                <form action="{{ upload_url }}" class="assignment_block_title" enctype="multipart/form-data" method="post">
+                  Upload File:
+                  <div class="upload_input_container">
+                    <input class="assignment_block" name="file" type="file"> <!-- <br> -->
+                     <input id="courseitemid" name="courseitemid" type="hidden"> <input class="assignment_block_last" name="submit" type="submit" value="Submit">
+                  </div>
+                </form>
+              </div>
+              <div id="documents"></div>
+          </div>
         </div>
-      </nav>
-    </div>
-    <div class="col-sm-3 col-lg-2">
-      <nav class="navbar navbar-default navbar-fixed-side">
-        <h2>Course Items</h2>
-        <div>
-          <form action="/add_assignment" onsubmit="return validateForm()" method="POST">
-            <span class="assignment_block_title"> Assignment Name: </span>
-            <br>
-            <input id="assignmentName" class="assignment_block" type="text" name="assignmentname">
-            <br>
-            <span class="assignment_block_title"> Description: </span>
-            <br>
-            <input id="assignmentDescription" class="assignment_block" type="text" name="description" >
-            <br>
-            <span class="assignment_block_title"> Assigned Date: </span>
-            <br>
-            <input id="assignDate" type="date" class="assignment_block" type="text" name="assigneddate" >
-            <br>
-            <span class="assignment_block_title"> Due Date: </span>
-            <br>
-            <input id="dueDate" type="date" class="assignment_block_last" type="text" name="duedate" >
-            <br>
-            <br>
-            <input type="hidden" name="courseid" id="courseid" />
-            <input class="assignment_block" type="submit" value="Submit">
-          </form> 
-        </div>
-        <div id="courseItems">
-        </div>
-      </nav>
-    </div>
-    <div class="col-sm-3 col-lg-3">
-      <nav class="navbar navbar-default navbar-fixed-side">
-        <h2>Course Item Description</h2>
-        <div id="courseItemDescriptions">
-        </div>
-        <div>
-          <h2>Documents</h2>
-          <form class="assignment_block_title" action="{{ upload_url }}" method="POST" enctype="multipart/form-data">
-            Upload File: 
-            <div class="upload_input_container">
-              <input class ="assignment_block" type="file" name="file">
-              <!-- <br> -->
-              <input  type="hidden" name="courseitemid" id="courseitemid" />
-              <input class="assignment_block_last" type="submit" name="submit" value="Submit">
-            </div>
-          </form>
-        </div>
-        <div id="documents"></div>
-      </nav>
-    </div>
-    <div class="col-sm-3 col-lg-5 chat">
-      <nav class="navbar navbar-default navbar-fixed-side ">
-      
-
+      </div>
     
-        <h2>Chat</h2>
-        <!-- Messages container -->
-        <div id="messages-container">
-          <div id="messages-container-helper">
-          <div id="messages">
-              <span id="chatresults"></span>
+      <div class="col-md-4">
+          <h2>Chat</h2><!-- Messages container -->
+          <div id="messages-container">
+            <div id="messages-container-helper">
+              <div id="messages">
+                <span id="chatresults"></span>
+              </div>
+              <div id="message-form">
+                <input id="chattext" placeholder="Message" type="text"><br>
+                <button id="chatpost">Send</button><br>
+              </div>
+            </div>
           </div>
-          <div id="message-form">
-            <input id="chattext" type="text" placeholder="Message"><br/>
-            <button id="chatpost">Send</button><br/>
-          </div>
-      </nav>
- 
-
-
       </div>
     </div>
   </div>
-</div>
-{% endblock %}
+
+  {% endblock %}
+
