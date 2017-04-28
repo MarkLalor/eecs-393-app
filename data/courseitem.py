@@ -50,19 +50,12 @@ class CourseItemUpload(webapp2.RequestHandler):
     def post(self):
         user = users.get_current_user()
         courseItemid = randint(0,1000)
-        print courseItemid
         courseid = self.request.get("courseid")
-        print courseid
         assignmentname = self.request.get("assignmentname")
-        print assignmentname
         description = self.request.get("description")
-        print description
         assigned_date = self.request.get("assigneddate")
-        print assigned_date
         due_date = self.request.get("duedate")
-        print due_date
         username = users.get_current_user().nickname().split("@")[0]
-        print username
 
         adatetime_object = datetime.datetime.strptime(assigned_date, '%Y-%m-%d')
         ddatetime_object = datetime.datetime.strptime(due_date, '%Y-%m-%d')

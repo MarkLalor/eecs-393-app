@@ -58,31 +58,7 @@ function handleCourseItemDBCHange() {
 	// Attach on child added
 	myFirebase.off();
 	attachListener();
-	// myFirebase.on('child_added', function(snapshot) {
-	// 	var msg = snapshot.val();
-
-		
-
-	// 	var msgUsernameElement = document.createElement("b");
-	// 	msgUsernameElement.textContent = msg.username;
-
-	// 	var msgTextElement = document.createElement("p");
-	// 	msgTextElement.textContent = msg.text;
-
-	// 	var msgElement = document.createElement("div");
-	// 	var msgUser = usernameInput.innerHTML;
- //  		var userName = splitUsername(msgUser);
-	// 	if (msg.username == userName) {
-	// 		// This users text (push it left)
-	// 		$(msgElement).css("position", "relative");
-	// 		$(msgElement).css("left", "300px");
-
-	// 	}
-	// 	msgElement.appendChild(msgUsernameElement);
-	// 	msgElement.appendChild(msgTextElement);
-
-	// 	document.getElementById("chatresults").appendChild(msgElement);
-	// });
+	
 }
 
 function handleCourseDBCHange() {
@@ -99,31 +75,7 @@ function handleCourseDBCHange() {
 	// Attach on child added
 	myFirebase.off();
 	attachListener();
-	// console.log("events");
-	// console.log($(myFirebase).data('events'));
-	// myFirebase.on('child_added', function(snapshot) {
-	// 	var msg = snapshot.val();
-
-	// 	var msgUsernameElement = document.createElement("b");
-	// 	msgUsernameElement.textContent = msg.username;
-
-	// 	var msgTextElement = document.createElement("p");
-	// 	msgTextElement.textContent = msg.text;
-
-	// 	var msgElement = document.createElement("div");
-	// 	var msgUser = usernameInput.innerHTML;
- //  		var userName = splitUsername(msgUser);
-	// 	if (msg.username == userName) {
-	// 		// This users text (push it left)
-	// 		$(msgElement).css("position", "relative");
-	// 		$(msgElement).css("left", "300px");
-
-	// 	}
-	// 	msgElement.appendChild(msgUsernameElement);
-	// 	msgElement.appendChild(msgTextElement);
-
-	// 	document.getElementById("chatresults").appendChild(msgElement);
-	// });
+	
 }
 
 postButton.addEventListener("click", function() {
@@ -171,22 +123,16 @@ function attachListener() {
 
 		msgUsernameElement.innerHTML = msg.username.substring(0, msg.username.indexOf('@'));
 		msgUsernameElement.class = "name";
-//		$(msgUsernameElement).css("position", "relative");
-//		$(msgUsernameElement).css("left", "10px");
-//		$(msgUsernameElement).css("color", "#0A304E");
 
 		var msgTextElement = document.createElement("p");
 		msgTextElement.innerHTML = msg.text;
 		msgTextElement.class = "message";
-//		$(msgTextElement).css("position", "relative");
-//		$(msgTextElement).css("left", "30px");
+
 
 		var msgElement = document.createElement("div");
-//		$(msgElement).addClass("message-container");
 		$(msgElement).addClass("container-fluid");
 		$(msgElement).addClass("visible");
 
-		//vimig added stuff here
 		$(msgElement).addClass("col-md-12");
 
 		var row1 = document.createElement("div");
@@ -205,18 +151,12 @@ function attachListener() {
 		$(p_container).addClass("col-md-12");
 		$(p_container2).addClass("col-md-12");
 
-		
-		// $(msgUsernameElement).css("width", "340px");
-		// $(msgTextElement).css("width", "340px");
+
 		row1.appendChild(p_container);
 		row1.appendChild(p_container2);
 
 		p_container.appendChild(msgUsernameElement);
 		p_container2.appendChild(msgTextElement);
-		//stopped here
-
-//		$(msgElement).css("width", "400px");
-
 
 		if (msg.username == userName) {
 			$(p_container).addClass("row1");
@@ -228,10 +168,7 @@ function attachListener() {
 
 
 		}
-		else {
-			// Not users text (push it slightly left)
-			//$(msgElement).css("left", "10px");
-		}
+		else {}
 		
 
 		document.getElementById("chatresults").appendChild(msgElement);

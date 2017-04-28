@@ -205,14 +205,7 @@ function populateDocuments(courseID, courseItemJSON, aCourseItemID){
 		}
 		}
 
-
-
-
-
-
-
 }
-
 
 // Mostly just copy and pasted, logic should be relooked at
 function populateCourseItemDescription(aCourseID, courseItemJSON, aCourseItemID) {
@@ -285,7 +278,3 @@ function createCoursesString(courseJSON, i) {
 function createCourseItemString(courseItem, i) {
 	return courseItem[i].name;
 }
-
-// function teCourseItemDescriptionString(courseItems, i) {
-// 	return courseItem[i].name;
-// }

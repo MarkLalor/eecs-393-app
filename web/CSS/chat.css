@@ -41,22 +41,7 @@
 .message-container.visible {
   opacity: 1;
 }
-/*
-.message-container .message {
-  display: table-cell;
-  width: calc(100% - 40px);
-  padding: 5px 0 5px 10px;
-}*/
 
-/*.message-container .name {
-  display: inline-block;
-  width: 100%;
-  padding-left: 40px;
-  font-style: italic;
-  font-size: 12px;
-  box-sizing: border-box;
-}
-*/
 #message-form {
   display: flex;
   flex-direction: row;
@@ -79,18 +64,6 @@
     font-weight: 900;
     -webkit-text-fill-color: white;
 }
-
-/*.row1 {
-
-  position: relative;
-  right: 22%;
-}
-
-.row2 {
-
-  position: relative;
-  right: 10%;
-}*/
 
 @media (max-width: 992px) {
   .row1 {

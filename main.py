@@ -27,7 +27,6 @@ OAUTH_TOKEN_LIST = {
 	"mmh124": "5590~IXIFbF2Bs4DPMjRisp0EKaz5k6dM6pNQzyoSnHIMz12m2spWpBGBlahhZqtLrg99", #Haus
 	"dxb448" : "5590~eRWgUDGbDMy6SXJObBiici05IAu12K8h1cTartJHPFzCTVe2KLdaxvktbf1BOru5", #dina
 }
-''' python dev_appserver.py C://Vimig/SoftwareEng/mainApp/eecs-393-app/app.yaml '''
 class MainPage(webapp2.RequestHandler):
 	def get(self):
 
@@ -46,13 +45,10 @@ class MainPage(webapp2.RequestHandler):
 
 		rc = RequestContext(oauth_token, base_api_url, timeout=60)
 		rc2 = RequestContext(oauth_token, base_api_url, timeout=60)
-		#db.GqlQuery("SELECT * FROM Course WHERE courseID = :1", courseID).get()
 		
 		#log in requirement as a handler in the yaml file
 		#additional failsafe here, can be removed
 		upload_url = blobstore.create_upload_url('/upload_document')
-		print("printing upload_url")
-		print(upload_url)
 		if not user:
 			login_url = users.create_login_url('/')
 			self.redirect(login_url)
@@ -75,9 +71,7 @@ class MainPage(webapp2.RequestHandler):
 			course_obj_list = []
 			for course in courseJSON:
 				course_id_list.append(course['id'])
-				#course_term = [spring, 2017]
 				course_term = course['term']['name'].split(' ')
-				#course_code = [department, SIS course number]
 				course_code = course['course_code'].split(' ')
 
 				if not self.RepresentsInt(course_code[1]):
@@ -134,12 +128,10 @@ class MainPage(webapp2.RequestHandler):
 				courses_render.append(q1.get())
 		
 		course_item_list = {}
-		#{courseID: [CourseItem1, CourseItem2] }
 		for courseID in curr_user_courseID_list:
 			q2 = CourseItem.gql("WHERE courseID = :1", courseID)
 			course_item_list[int(courseID)] = []
 			for course_item in q2:
-				print course_item
 				course_item_list[int(courseID)].append(course_item.getJSONRepresentation())
 
 		nickname = user.nickname() #for debugging
@@ -170,12 +162,6 @@ class MainPage(webapp2.RequestHandler):
     autoescape=True,
     auto_reload=True)
 
-	# @staticmethod
-	# def html_print(request, filename, *parts):
-	# 	with open('web/html/' + filename + '.html', 'r') as content_file:
-	# 		print content_file.read() % parts
-	# 		request.response.out.write(content_file.read() % parts)
-	# 		request.response.out.write("\n")
 	def RepresentsInt(self, s):
 	    try:
 	    	int(s)

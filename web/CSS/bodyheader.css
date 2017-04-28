@@ -4,8 +4,6 @@ h1 {
 }
 #WelcomeMessage{
    position:relative;
-   /*right:10px;
-   top:5px;*/
    float:right;
 }
 
