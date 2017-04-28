@@ -30,7 +30,7 @@ class DocumentUploadHandler(blobstore_handlers.BlobstoreUploadHandler):
 			courseitemid = self.request.get("courseitemid")
 			username = users.get_current_user().nickname().split("@")[0]
 			uploadDocID = str(id(upload.key()))
-			
+
 			user_document = UserDocument(
 				user=username,
 				blob_key=upload.key(),
@@ -43,14 +43,13 @@ class DocumentUploadHandler(blobstore_handlers.BlobstoreUploadHandler):
 			
 			helper_document.put()
 			user_document.put()
-			
+
 			q = CourseItem.gql("WHERE courseItemID = :1", int(courseitemid))
 			
 			courseitem = q.get()
 			courseitem.documents.append(upload.filename + ":" + str(upload.key()) + ":" + username)
 			
-			courseitem.put()
-			
+			courseitem.put()	
 			my_query = blobstore.BlobInfo.all()
 			
 			self.redirect('/')
@@ -72,7 +71,6 @@ class RemoveDocumentHandler(blobstore_handlers.BlobstoreUploadHandler):
 			key_cid = url.split("/upload_remove_document/")[1]
 			key_cid_split = key_cid.split(":")
 			parser = HTMLParser()
-			#courseitemid = self.request.get("courseitemid")
 			q = CourseItem.gql("WHERE courseItemID = :1", int(key_cid_split[1]))
 			courseitem = q.get()
 			bk = ''
