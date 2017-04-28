@@ -37,8 +37,6 @@ function validateForm() {
 function setUp () {
 	var x = document.getElementById("courses");
 	if (x.firstElementChild) {
-		console.log(x.firstElementChild);
-		console.log("hello");
 		x.firstElementChild.click();
 	}
 
@@ -46,7 +44,6 @@ function setUp () {
 
 function openCourseItems(courseID, course_item_list){
 
-	console.log('clicking on open courseItem');
 	var elements = document.getElementsByClassName('courseItemDescription');
 	var elements2 = document.getElementById('documents')
     while(elements.length > 0){
@@ -64,7 +61,6 @@ function openCourseItems(courseID, course_item_list){
 
 	$(".courses").removeClass(addClass);
 	$("#" + courseID).addClass(addClass);
-	console.log(courseID)
 
 	course_items = course_item_list[courseID];
 	
@@ -75,14 +71,12 @@ function openCourseItems(courseID, course_item_list){
 }
 
 function populateCourses(courseJSON) {
-	console.log(courseJSON)
 	for (var i in courseJSON) {
 
 		// Create tag
 		var course = document.createElement('p');
 		course.innerHTML = createCoursesString(courseJSON, i);
 		course.id = i; // id is the courseID
-		console.log('adding a listener')
 		course.addEventListener("click", populateCourseItems);
 
 		// Append to div
@@ -98,9 +92,6 @@ function populateCourseItems(aCourseID, courseItemJSON) {
 	var courseItems;
 	var courseItemDiv = document.getElementById("courseItems");
 
-	console.log("printing out the json part")
-	console.log(courseItemJSON)
-
 	for (var i in courseItemJSON) {
 		if (i == courseID) {
 			courseItems = courseItemJSON[i];
@@ -113,13 +104,7 @@ function populateCourseItems(aCourseID, courseItemJSON) {
 	}
 
 	for (var i in courseItems) {
-		console.log(courseItems);
-		console.log(i);
 		var correctedJSON = JSON.parse(courseItems[i]);
-		console.log(correctedJSON)
-		console.log(correctedJSON.name)
-
-		console.log("printing courseitem in json")
 		// Create tag
 		var courseItemID = 0;
 		var courseItemTag = document.createElement('p');
@@ -144,32 +129,21 @@ function populateCourseItems(aCourseID, courseItemJSON) {
 	}
 
 	// Function in chat
-	console.log("This is populating");
 	getCourseItems();
 }
 
 function populateDocuments(courseID, courseItemJSON, aCourseItemID){
-	console.log("hello from the otherside")
 	var courseID = courseID
 	var courseItemID = aCourseItemID
 	var courseItems;
 	var courseItemDes = document.getElementById("documents");
 	document.getElementById("courseitemid").value = courseItemID;
-	console.log("printing out all the fun stuff")
-	console.log(document.getElementById(courseID.toString()).value)
-
-	console.log(courseItemJSON)
-
-
 
 	for (var i in courseItemJSON) {
 		if (i == courseID) {
-			console.log("enters courseiD secitons");
 			for (var j in courseItemJSON[i]) {
-				console.log(courseItemJSON[i][j])
 				var prettyjson = JSON.parse(courseItemJSON[i][j])
 				if (prettyjson.courseItemId == courseItemID){
-					console.log("enters the deepest levels");
 					courseItems = prettyjson;
 					break;
 				}
@@ -193,10 +167,8 @@ function populateDocuments(courseID, courseItemJSON, aCourseItemID){
 			for (var j in courseItems[i]){
 				var res = courseItems[i][j].split(":");
 				var courseItemTag = document.createElement('p');
-				console.log(courseItems[i])
 				courseItemTag.className += "documents"
 				courseItemTag.innerHTML = courseItems[i]
-				//courseItemDes.appendChild(courseItemTag);
 				var link = document.createElement('a');
 				link.textContent = res[0];
 				link.href = '/upload_view_document/' + res[1];
@@ -205,8 +177,6 @@ function populateDocuments(courseID, courseItemJSON, aCourseItemID){
 				var user = document.getElementById("nickname").value
 				var usersplit= user.split("@")
 				if(res.length == 3){
-					console.log(res[2])
-					console.log(usersplit)
 
 					if(res[2] == usersplit[0]){
 						var btn = document.createElement("button");
@@ -253,16 +223,11 @@ function populateCourseItemDescription(aCourseID, courseItemJSON, aCourseItemID)
 	var courseItemDes = document.getElementById("courseItemDescriptions");
 	document.getElementById("courseitemid").value = courseItemID;
 
-	console.log(courseItemJSON)
-
 	for (var i in courseItemJSON) {
 		if (i == courseID) {
-			console.log("enters courseiD secitons");
 			for (var j in courseItemJSON[i]) {
-				console.log(courseItemJSON[i][j])
 				var prettyjson = JSON.parse(courseItemJSON[i][j])
 				if (prettyjson.courseItemId == courseItemID){
-					console.log("enters the deepest levels");
 					courseItems = prettyjson;
 					break;
 				}
@@ -290,7 +255,6 @@ function populateCourseItemDescription(aCourseID, courseItemJSON, aCourseItemID)
 		var courseItemTag = document.createElement('p');
 		courseItemTag.innerHTML = i + ": " + courseItems[i];
 		courseItemTag.className += "courseItemDescription"
-		//console.log(courseItemTag.innerHTML)
 		// Append to div
 		courseItemDes.appendChild(courseItemTag);
 
@@ -319,8 +283,6 @@ function createCoursesString(courseJSON, i) {
 }
 
 function createCourseItemString(courseItem, i) {
-	console.log(courseItem)
-	console.log(i)
 	return courseItem[i].name;
 }
 
