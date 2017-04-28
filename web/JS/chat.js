@@ -163,45 +163,68 @@ function splitUsername(username) {
 function attachListener() {
 
 	myFirebase.on('child_added', function(snapshot) {
+		var d = new Date()
+		console.log(d)
 		var msg = snapshot.val();
 
-		var msgUsernameElement = document.createElement("div");
+		var msgUsernameElement = document.createElement("p");
 
 		msgUsernameElement.innerHTML = msg.username.substring(0, msg.username.indexOf('@'));
 		msgUsernameElement.class = "name";
-		$(msgUsernameElement).css("position", "relative");
-		$(msgUsernameElement).css("left", "10px");
-		$(msgUsernameElement).css("color", "#3366ff");
+//		$(msgUsernameElement).css("position", "relative");
+//		$(msgUsernameElement).css("left", "10px");
+//		$(msgUsernameElement).css("color", "#0A304E");
 
-		var msgTextElement = document.createElement("div");
+		var msgTextElement = document.createElement("p");
 		msgTextElement.innerHTML = msg.text;
 		msgTextElement.class = "message";
-		$(msgTextElement).css("position", "relative");
-		$(msgTextElement).css("left", "30px");
+//		$(msgTextElement).css("position", "relative");
+//		$(msgTextElement).css("left", "30px");
 
 		var msgElement = document.createElement("div");
-		$(msgElement).addClass("message-container");
+//		$(msgElement).addClass("message-container");
+		$(msgElement).addClass("container-fluid");
 		$(msgElement).addClass("visible");
 
+		//vimig added stuff here
+		$(msgElement).addClass("col-md-12");
 
-		$(msgElement).css("width", "400px");
+		var row1 = document.createElement("div");
+		$(row1).addClass("row");
+		msgElement.appendChild(row1)
 
+		$(msgUsernameElement).addClass("chat_text");
+		$(msgUsernameElement).addClass("chat_username");
+		$(msgTextElement).addClass("chat_text");
 
- 
 		var msgUser = usernameInput.innerHTML;
 		var userName = splitUsername(msgUser);
 
+		var p_container = document.createElement("div");
+		var p_container2 = document.createElement("div");
+		$(p_container).addClass("col-md-12");
+		$(p_container2).addClass("col-md-12");
 
-		$(msgUsernameElement).css("width", "340px");
-		$(msgTextElement).css("width", "340px");
+		
+		// $(msgUsernameElement).css("width", "340px");
+		// $(msgTextElement).css("width", "340px");
+		row1.appendChild(p_container);
+		row1.appendChild(p_container2);
 
-		msgElement.appendChild(msgUsernameElement);
-		msgElement.appendChild(msgTextElement);
+		p_container.appendChild(msgUsernameElement);
+		p_container2.appendChild(msgTextElement);
+		//stopped here
+
+//		$(msgElement).css("width", "400px");
+
 
 		if (msg.username == userName) {
+			$(p_container).addClass("row1");
+			$(p_container2).addClass("row2");
 			// This users text (push it left)
-			$(msgUsernameElement).parent().closest('div').css("float", "right");
-			$(msgTextElement).parent().closest('div').css("float", "right");
+			$(msgUsernameElement).css("float", "right");
+			$(msgTextElement).css("float", "right");
+			// $(msgTextElement).parent().closest('div').css("float", "right");
 
 
 		}
