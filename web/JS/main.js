@@ -44,22 +44,9 @@ function setUp () {
 
 }
 
-/** Appends Courses to the Course section Expecting JSON:
-{
-	courseID: [
-		{course: STRING,
-		 department: STRING, 
-		 courseNumber: STRING, 
-		 year : integer, 
-		 term : integer}
-	],
-}
-**/
-
 function openCourseItems(courseID, course_item_list){
 
 	console.log('clicking on open courseItem');
-	//document.getElementById("courseItemDescription").value = ""
 	var elements = document.getElementsByClassName('courseItemDescription');
 	var elements2 = document.getElementById('documents')
     while(elements.length > 0){
@@ -77,24 +64,13 @@ function openCourseItems(courseID, course_item_list){
 
 	$(".courses").removeClass(addClass);
 	$("#" + courseID).addClass(addClass);
-
-	// var courses = document.getElementsByClassName("courses");
-
-	// for (var x=0; x<courses.length; x++){
-	// 	courses[x].removeClass(addClass)
-		
-	// }
 	console.log(courseID)
 
 	course_items = course_item_list[courseID];
-	//document.getElementById('courseid').value = courseID;
-	//console.log(course_item_list)
 	
 	var correctedJSON;
 
 	populateCourseItems(courseID,course_item_list);
-	
-	//course.addEventListener("click", populateCourseItems);
 
 }
 
@@ -115,47 +91,23 @@ function populateCourses(courseJSON) {
 	}
 }
 
-/** 
-DUMMY DATA
-**/
-// var courseItemJSON= {
-// 	0: [{ courseItemId: 0, creator: "BOB", creationTime: "10/0/2017", name: "Assignment", body: "shared memory assignment", assigned_date: "10/2/2017", due_date: "10/25/2017"},
-// 		{ courseItemId: 1, creator: "BOB0", creationTime: "10/0/2017", name: "Assignment0", body: "shared memory assignment", assigned_date: "10/2/2017", due_date: "10/25/2017"},
-// 		{ courseItemId: 2, creator: "BOB00", creationTime: "10/0/2017", name: "Assignment00", body: "shared memory assignment", assigned_date: "10/2/2017", due_date: "10/25/2017"},
-// 		{ courseItemId: 3, creator: "BOB000", creationTime: "10/0/2017", name: "Assignment000", body: "shared memory assignment", assigned_date: "10/2/2017", due_date: "10/25/2017"},
-// 		{ courseItemId: 4, creator: "BOB0000", creationTime: "10/0/2017", name: "Assignment0000", body: "shared memory assignment", assigned_date: "10/2/2017", due_date: "10/25/2017"}
-// 		],
-// 	1: [{ courseItemId: 1, creator: "BOB1", creationTime: "10/1/2017", name: "Assignment1", body: "Linked Lists", assigned_date: "10/2/2017", due_date: "10/25/2017"}],
-// 	2: [{ courseItemId: 2, creator: "BOB2", creationTime: "10/2/2017", name: "Assignment2", body: "eigen values", assigned_date: "10/2/2017", due_date: "10/25/2017"}],
-// 	3: [{ courseItemId: 3, creator: "BOB3", creationTime: "10/3/2017", name: "Assignment3", body: "sheet reading", assigned_date: "10/2/2017", due_date: "10/25/2017"}],
-// }
 
-/** 
-DUMMY DATA
-**/
 function populateCourseItems(aCourseID, courseItemJSON) {
 	var courseID = aCourseID
-	//console.log('Clicked on a course');
 	document.getElementById('courseid').value = courseID;
-	//console.log(document.getElementById('courseid').value)
 	var courseItems;
 	var courseItemDiv = document.getElementById("courseItems");
 
-	// basically the table look up: courseItems = getTable(courseID)
 	console.log("printing out the json part")
 	console.log(courseItemJSON)
 
 	for (var i in courseItemJSON) {
-		//console.log("printing out the json part")
-		//console.log(courseItemJSON[i])
 		if (i == courseID) {
 			courseItems = courseItemJSON[i];
-			//console.log("courseItemJSON[i] ", courseItemJSON[i])
 			break;
 		}
 	}
-	//console.log('courseItems' + courseItems);
-	// clear current list
+	
 	while (courseItemDiv.firstChild) {
    	 	courseItemDiv.removeChild(courseItemDiv.firstChild);
 	}
@@ -178,7 +130,7 @@ function populateCourseItems(aCourseID, courseItemJSON) {
 
 		// Append to div
 		courseItemDiv.appendChild(courseItemTag);
-		//console.log("test" , courseItemJSON[courseID])
+
 		courseItemID = correctedJSON.courseItemId;
 
 		(function(_courseItemID) {
@@ -263,19 +215,12 @@ function populateDocuments(courseID, courseItemJSON, aCourseItemID){
 						btn.appendChild(t); 
 						courseItemDes.appendChild(btn); 
 						btn.onclick = function () {
-        					//location.href = "/upload_remove_document/" + res[1];};
-
-							//btn.href = '/remove_document/' + res[1]
-							//btn.appendChild(t); 
-							//courseItemDes.appendChild(btn); 
 							var form = document.createElement('form');
     						form.setAttribute('method', 'post');
    							form.setAttribute('action', "/upload_remove_document/" + res[1]+":"+cid);
    							form.style.display = 'hidden';
     						document.body.appendChild(form)
     						form.submit();
-							//courseItemDes.appendChild(btn); 
-							console.log("appending button")
 						};
 					}
 				}
@@ -288,21 +233,6 @@ function populateDocuments(courseID, courseItemJSON, aCourseItemID){
 
 
 		}
-		/*
-		if(i == "courseItemId") {
-			continue;
-		}
-		if(i == "documents"){
-			continue;
-		}
-		// Create tag
-		var courseItemTag = document.createElement('p');
-		courseItemTag.innerHTML = i + ": " + courseItems[i];
-		courseItemTag.className += "courseItemDescription"
-		//console.log(courseItemTag.innerHTML)
-		// Append to div
-		courseItemDes.appendChild(courseItemTag);
-		*/
 		}
 
 
@@ -316,30 +246,7 @@ function populateDocuments(courseID, courseItemJSON, aCourseItemID){
 
 // Mostly just copy and pasted, logic should be relooked at
 function populateCourseItemDescription(aCourseID, courseItemJSON, aCourseItemID) {
-/*
-	console.log(courseItemJSON)
-	var courseItemDes = document.getElementById("courseItemDescriptions");
-	document.getElementById("courseitemid").value = aCourseItemID;
 
-	for (var i in courseItemJSON) {
-		if(i == "courseItemId") {
-			continue;
-		}
-		if(i == "documents"){
-			continue;
-		}
-		// Create tag
-		var courseItemTag = document.createElement('p');
-		courseItemTag.innerHTML = i + ": " + courseItemJSON[i];
-		courseItemTag.className += "courseItemDescription"
-		//console.log(courseItemTag.innerHTML)
-		// Append to div
-		courseItemDes.appendChild(courseItemTag);
-		}
-*/
-
-
-	//console.log(aCourseID + " " + aCourseItemID)
 	var courseID = aCourseID
 	var courseItemID = aCourseItemID
 	var courseItems;
@@ -388,15 +295,6 @@ function populateCourseItemDescription(aCourseID, courseItemJSON, aCourseItemID)
 		courseItemDes.appendChild(courseItemTag);
 
 		}
-
-
-/*
-	(function(_courseItemID) {
-			courseItemTag.addEventListener("click", function(){populateCourseItemDescription(courseID, courseItemJSON, _courseItemID)});	
-		})(courseItemID);
-		
-	}
-*/
 
 }
 
