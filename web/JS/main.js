@@ -57,6 +57,7 @@ function setUp () {
 **/
 
 function openCourseItems(courseID, course_item_list){
+
 	console.log('clicking on open courseItem');
 	//document.getElementById("courseItemDescription").value = ""
 	var elements = document.getElementsByClassName('courseItemDescription');
@@ -247,7 +248,37 @@ function populateDocuments(courseID, courseItemJSON, aCourseItemID){
 				var link = document.createElement('a');
 				link.textContent = res[0];
 				link.href = '/upload_view_document/' + res[1];
+				link.style.paddingRight = "20px";
 				courseItemDes.appendChild(link);
+				var user = document.getElementById("nickname").value
+				var usersplit= user.split("@")
+				if(res.length == 3){
+					console.log(res[2])
+					console.log(usersplit)
+
+					if(res[2] == usersplit[0]){
+						var btn = document.createElement("button");
+						var t = document.createTextNode("Remove");
+						var cid = document.getElementById("courseitemid").value
+						btn.appendChild(t); 
+						courseItemDes.appendChild(btn); 
+						btn.onclick = function () {
+        					//location.href = "/upload_remove_document/" + res[1];};
+
+							//btn.href = '/remove_document/' + res[1]
+							//btn.appendChild(t); 
+							//courseItemDes.appendChild(btn); 
+							var form = document.createElement('form');
+    						form.setAttribute('method', 'post');
+   							form.setAttribute('action', "/upload_remove_document/" + res[1]+":"+cid);
+   							form.style.display = 'hidden';
+    						document.body.appendChild(form)
+    						form.submit();
+							//courseItemDes.appendChild(btn); 
+							console.log("appending button")
+						};
+					}
+				}
 				linebreak = document.createElement("br")
 				courseItemDes.appendChild(linebreak)
 				k= k+1

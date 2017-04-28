@@ -9,6 +9,9 @@
           <div class="col-md-4">
           <div class="container-fluid panes">
               <h2>Courses</h2>
+              <div id="user">
+                <input id="nickname" type="hidden" value="{{nickname}}">
+              </div>
               <div id="courses">
                 {% if courses and course_items %} {% for course in courses %}
                 <p class="courses" id="{{course.courseID}}" onclick="openCourseItems({{course.courseID}},{{course_items}})">{{course.name}}</p>{% endfor %} {% endif %}
