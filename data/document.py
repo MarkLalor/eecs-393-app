@@ -6,14 +6,16 @@ from google.appengine.ext.webapp import blobstore_handlers
 import webapp2
 from data.courseitem import CourseItem
 import uuid
+from HTMLParser import HTMLParser
 
 class HelperDocument(ndb.Model):
-	documentID = ndb.StringProperty()
+	blob_key_string = ndb.StringProperty()
 	blob_key = ndb.BlobKeyProperty()
     #TODO: actual document hookup
 
 class UserDocument(ndb.Model):
 	user = ndb.StringProperty()
+	blob_key_string = ndb.StringProperty()
 	blob_key = ndb.BlobKeyProperty()
 	courseitemid = ndb.IntegerProperty()
 
@@ -33,9 +35,10 @@ class DocumentUploadHandler(blobstore_handlers.BlobstoreUploadHandler):
 			user_document = UserDocument(
 				user=username,
 				blob_key=upload.key(),
+				blob_key_string=str(upload.key()),
 				courseitemid=int(courseitemid))
 			helper_document = HelperDocument(
-				documentID = uploadDocID,
+				blob_key_string= str(upload.key()),
 				blob_key=upload.key())
 			helper_document.put()
 			user_document.put()
@@ -43,7 +46,7 @@ class DocumentUploadHandler(blobstore_handlers.BlobstoreUploadHandler):
 			q = CourseItem.gql("WHERE courseItemID = :1", int(courseitemid))
 			courseitem = q.get()
 			print courseitem
-			courseitem.documents.append(upload.filename + ":" + str(upload.key()))
+			courseitem.documents.append(upload.filename + ":" + str(upload.key()) + ":" + username)
 			courseitem.put()
 			print "done adding to database"
 			my_query = blobstore.BlobInfo.all()
@@ -62,7 +65,38 @@ class ViewDocumentHandler(blobstore_handlers.BlobstoreDownloadHandler):
 		else:
 			self.send_blob(document_key)
 
+class RemoveDocumentHandler(blobstore_handlers.BlobstoreUploadHandler):
+	def post(self,request):
+		try:
+			url = self.request.url
+			key_cid = url.split("/upload_remove_document/")[1]
+			key_cid_split = key_cid.split(":")
+			parser = HTMLParser()
+			#courseitemid = self.request.get("courseitemid")
+			q = CourseItem.gql("WHERE courseItemID = :1", int(key_cid_split[1]))
+			courseitem = q.get()
+			bk = ''
+			print(courseitem.documents)
+			for i in courseitem.documents:
+				bk = i.split(":")
+				print(str(key_cid_split[0]))
+				print(key_cid_split[0].replace("%3D", "="))
+				print(bk[1])
+				if(key_cid_split[0].replace("%3D", "=") == bk[1]):
+					print("hello")
+					courseitem.documents.remove(i)
+			print(courseitem.documents)
+			courseitem.put()
+			blobkey = UserDocument.gql("WHERE blob_key_string= :1", bk[1]).get()
+			blobstore.delete(bk[1])
+			blobkey.key.delete()
+			self.redirect('/')
+
+		except:
+			self.error(500)
+
 app = webapp2.WSGIApplication([
     ('/upload_document', DocumentUploadHandler),
-    ('/upload_view_document/([^/]+)?', ViewDocumentHandler)
+    ('/upload_view_document/([^/]+)?', ViewDocumentHandler),
+    ('/upload_remove_document/([^/]+)?', RemoveDocumentHandler)
 ], debug=True)
